@@ -1,13 +1,15 @@
-# استخدم صورة Lua الأساسية
+# استخدم صورة Ubuntu الأساسية
 FROM ubuntu:latest
 
-# تحديث النظام وتثبيت المتطلبات
+# تحديث النظام وتثبيت المتطلبات الأساسية
 RUN apt-get update && apt-get install -y \
     lua5.3 \
     luarocks \
     redis-server \
     git \
-    curl
+    curl \
+    build-essential \
+    liblua5.3-dev  # ✅ هذا مهم لتجنب الخطأ
 
 # تثبيت مكتبات Lua المطلوبة
 RUN luarocks install luasocket && \
