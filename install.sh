@@ -1,55 +1,42 @@
 #!/usr/bin/env bash
+
 cd $HOME/Cybercode
+
 install() {
-rm -rf $HOME/.telegram-cli
-sudo chmod +x tg
-chmod +x Cybercode
-chmod +x ts
-./ts
+    rm -rf $HOME/.telegram-cli
+    sudo chmod +x tg Cybercode ts
+    ./ts
 }
+
 get() {
-rm -fr Cybercode.lua
-rm -fr sudo.lua
-wget "https://raw.githubusercontent.com/SourceCybercode/Cybercode/master/Cybercode.lua"
-lua start.lua
+    rm -fr Cybercode.lua sudo.lua
+    wget -q "https://raw.githubusercontent.com/SourceCybercode/Cybercode/master/Cybercode.lua"
+    lua start.lua
 }
-installall(){
-apt update
-apt upgrade
-apt install dnsutils
-sudo apt-get update
-sudo apt-get upgrade
-sudo apt-get install tmux
-sudo apt-get install luarocks
-sudo apt-get install screen
-sudo apt-get install libreadline-dev libconfig-dev libssl-dev lua5.2 liblua5.2-dev lua-socket lua-sec lua-expat libevent-dev make unzip git redis-server autoconf g++ libjansson-dev libpython-dev expat libexpat1-dev
-sudo apt-get update
-sudo apt-get install
-sudo apt-get install upstart-sysv
-wget http://luarocks.org/releases/luarocks-2.2.2.tar.gz;tar zxpf luarocks-2.2.2.tar.gz;cd luarocks-2.2.2 && ./configure
-sudo make bootstrap
-sudo luarocks install luasocket
-sudo luarocks install luasec
-sudo apt-get install libconfig++9v5 -y 
-sudo apt-get install libstdc++6 -y
-sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y 
-sudo apt-get install lua-lgi -y  
-sudo apt-get install libnotify-dev -y 
-sudo apt-get install libreadline-dev libconfig-dev libssl-dev lua5.2 liblua5.2-dev lua-socket lua-sec lua-expat libevent-dev make unzip git redis-server autoconf g++ libjansson-dev libpython-dev expat libexpat1-dev -y
-sudo apt-get update 
-sudo apt-get upgrade -y
+
+install_all() {
+    apt update && apt upgrade -y
+    apt install -y dnsutils tmux luarocks screen libreadline-dev libconfig-dev libssl-dev \
+                   lua5.2 liblua5.2-dev lua-socket lua-sec lua-expat libevent-dev make \
+                   unzip git redis-server autoconf g++ libjansson-dev libpython-dev \
+                   expat libexpat1-dev upstart-sysv
+
+    wget -q http://luarocks.org/releases/luarocks-2.2.2.tar.gz
+    tar zxpf luarocks-2.2.2.tar.gz
+    cd luarocks-2.2.2
+    ./configure
+    sudo make bootstrap
+    sudo luarocks install luasocket
+    sudo luarocks install luasec
+    cd ..
+    rm -rf luarocks*
 }
+
 if [ "$1" = "ins" ]; then
-install
+    install
+elif [ "$1" = "get" ]; then
+    get
+else
+    install_all
+    lua start.lua
 fi
-if [ "$1" = "get" ]; then
-get
-fi
-installall
-cd ..
-rm -rf luarocks*
-cd Cybercode
-rm -rf luarocks*
-lua start.lua
-
-
