@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: Cybercode
+    env: ubuntu
+    buildCommand: |
+      apt-get update && apt-get install -y lua5.3 && apt-get clean
+    startCommand: lua Cybercode.lua
+    plan: free
+    autoDeploy: true
