@@ -9,9 +9,9 @@ URL     = dofile("./File_Libs/url.lua")
 http    = require("socket.http")
 https   = require("ssl.https")
 sudos   = dofile("sudo.lua")
-bot_id  = token:match("(%d+)")  
-Id_Sudo = Sudo
-List_Sudos = {Id_Sudo,1308174302}
+bot_id  = "7605400256"
+Id_Sudo = 7601607055
+List_Sudos = {Id_Sudo, 7601607055}
 User = io.popen("whoami"):read('*a')
 IP = io.popen("dig +short myip.opendns.com @resolver1.opendns.com"):read('*a')
 name = io.popen("uname -a | awk '{ name = $2 } END { print name }'"):read('*a')
@@ -19,9 +19,9 @@ port = io.popen("echo ${SSH_CLIENT} | awk '{ port = $3 } END { print port }'"):r
 Rtime = io.popen("date +'%Y-%m-%d %T'"):read('*a')
 print("\27[34m"..[[
 >> The Bot is Running
->> Bot source > Cybercode
->>Source channel > @mwote
->>Source developer > @kmhhh
+>> Bot source > Mike
+>>Source channel > @roknqa
+>>Source developer > tahikal
 
 
 Installation information
@@ -164,9 +164,9 @@ end
 return var
 end 
 function Rank_Checking(user_id,chat_id)
-if tonumber(user_id) == tonumber(1308174302) then  
+if tonumber(user_id) == tonumber(7601607055) then  
 var = true  
-elseif tonumber(user_id) == tonumber(1308174302) then
+elseif tonumber(user_id) == tonumber(7601607055) then
 var = true  
 elseif tonumber(user_id) == tonumber(Id_Sudo) then
 var = true  
@@ -194,9 +194,9 @@ end
 return var
 end 
 function Get_Rank(user_id,chat_id)
-if tonumber(user_id) == tonumber(1308174302) then  
+if tonumber(user_id) == tonumber(7601607055) then  
 var = 'مطور السورس'
-elseif tonumber(user_id) == tonumber(1308174302) then  
+elseif tonumber(user_id) == tonumber(7601607055) then  
 var = "مطور السورس"  
 elseif DevCybercodee(user_id) == true then
 var = "المطور الاساسي"  
@@ -515,9 +515,9 @@ end
 function Reply_Status(msg,user_id,status,text)
 tdcli_function ({ID = "GetUser",user_id_ = user_id},function(arg,data) 
 if data.first_name_ ~= false then
-local UserName = (data.username_ or "mwote")
-local NameUser = "[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/mwote)\n — — — — — — — — —\n⌔︙بواسطه -› ["..data.first_name_.."](T.me/"..UserName..")"
-local NameUserr = "[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/mwote)\n — — — — — — — — —\n⌔︙اسم المستخدم -› ["..data.first_name_.."](T.me/"..UserName..")"
+local UserName = (data.username_ or "roknqa")
+local NameUser = "[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/roknqa)\n — — — — — — — — —\n⌔︙بواسطه -› ["..data.first_name_.."](T.me/"..UserName..")"
+local NameUserr = "[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/roknqa)\n — — — — — — — — —\n⌔︙اسم المستخدم -› ["..data.first_name_.."](T.me/"..UserName..")"
 if status == "lock" then
 send(msg.chat_id_, msg.id_,NameUser.."\n"..text.."\n— — — — — — — — —\n⌔︙تم تنفيذ الامر بخاصيه ( المسح )\n")
 return false
@@ -578,7 +578,7 @@ message = 'ملك التفاعل'
 elseif tonumber(msgs) < 9500 then 
 message = 'امبروطور التفاعل' 
 elseif tonumber(msgs) < 10000000000 then 
-message = 'رب التفاعل'  
+message = 'قوت التفاعل'  
 end 
 return message 
 end
@@ -2774,11 +2774,11 @@ if (result and result.type_ and result.type_.ID == "ChannelChatInfo") then
 send(msg.chat_id_,msg.id_,"⌔︙عذرا عزيزي المستخدم هاذا معرف قناة يرجى استخدام الامر بصوره صحيحه !")   
 return false 
 end      
-if result.id_ == tonumber(1308174302) then
+if result.id_ == tonumber(7601607055) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
-if result.id_ == tonumber(1308174302) then
+if result.id_ == tonumber(7601607055) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
@@ -2801,11 +2801,11 @@ if userid == tonumber(Id_Sudo) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور البوت الاساسي \n")
 return false 
 end
-if userid == tonumber(1308174302) then
+if userid == tonumber(7601607055) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
-if userid == tonumber(1308174302) then
+if userid == tonumber(7601607055) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
@@ -3585,19 +3585,19 @@ function by_reply(extra, result, success)
 tdcli_function ({ID = "GetUser",user_id_ = result.sender_user_id_},function(arg,data) 
 local Cybercodert = database:get(bot_id.."Cybercode:Comd:New:rt:bot:"..RTPA..msg.chat_id_)
 if Cybercodert == "مميز" and Addictive(msg) then
-send(msg.chat_id_, msg.id_,"[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/mwote)\n — — — — — — — — —\n⌔︙العضو -› ["..data.first_name_.."](t.me/"..(data.username_ or "mwote")..")".."\n⌔︙تم رفعه "..RTPA.." هنا\n")
+send(msg.chat_id_, msg.id_,"[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/roknqa)\n — — — — — — — — —\n⌔︙العضو -› ["..data.first_name_.."](t.me/"..(data.username_ or "roknqa")..")".."\n⌔︙تم رفعه "..RTPA.." هنا\n")
 database:set(bot_id.."Cybercode:Comd:New:rt:User:"..msg.chat_id_..result.sender_user_id_,RTPA) 
 database:sadd(bot_id.."Cybercode:Special:User"..msg.chat_id_,result.sender_user_id_)  
 elseif Cybercodert == "ادمن" and Owner(msg) then 
-send(msg.chat_id_, msg.id_,"[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/mwote)\n — — — — — — — — —\n⌔︙العضو -› ["..data.first_name_.."](t.me/"..(data.username_ or "mwote")..")".."\n⌔︙تم رفعه "..RTPA.." هنا\n")
+send(msg.chat_id_, msg.id_,"[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/roknqa)\n — — — — — — — — —\n⌔︙العضو -› ["..data.first_name_.."](t.me/"..(data.username_ or "roknqa")..")".."\n⌔︙تم رفعه "..RTPA.." هنا\n")
 database:set(bot_id.."Cybercode:Comd:New:rt:User:"..msg.chat_id_..result.sender_user_id_,RTPA)
 database:sadd(bot_id.."Cybercode:Mod:User"..msg.chat_id_,result.sender_user_id_)  
 elseif Cybercodert == "مدير" and Constructor(msg) then
-send(msg.chat_id_, msg.id_,"[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/mwote)\n — — — — — — — — —\n⌔︙العضو -› ["..data.first_name_.."](t.me/"..(data.username_ or "mwote")..")".."\n⌔︙تم رفعه "..RTPA.." هنا\n")
+send(msg.chat_id_, msg.id_,"[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/roknqa)\n — — — — — — — — —\n⌔︙العضو -› ["..data.first_name_.."](t.me/"..(data.username_ or "roknqa")..")".."\n⌔︙تم رفعه "..RTPA.." هنا\n")
 database:set(bot_id.."Cybercode:Comd:New:rt:User:"..msg.chat_id_..result.sender_user_id_,RTPA)  
 database:sadd(bot_id.."Cybercode:Manager"..msg.chat_id_,result.sender_user_id_)  
 elseif Cybercodert == "عضو" and Addictive(msg) then
-send(msg.chat_id_, msg.id_,"[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/mwote)\n — — — — — — — — —\n⌔︙العضو -› ["..data.first_name_.."](t.me/"..(data.username_ or "mwote")..")".."\n⌔︙تم رفعه "..RTPA.." هنا\n")
+send(msg.chat_id_, msg.id_,"[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/roknqa)\n — — — — — — — — —\n⌔︙العضو -› ["..data.first_name_.."](t.me/"..(data.username_ or "roknqa")..")".."\n⌔︙تم رفعه "..RTPA.." هنا\n")
 end
 end,nil)   
 end   
@@ -3620,19 +3620,19 @@ function by_reply(extra, result, success)
 tdcli_function ({ID = "GetUser",user_id_ = result.sender_user_id_},function(arg,data) 
 local Cybercodert = database:get(bot_id.."Cybercode:Comd:New:rt:bot:"..RTPA..msg.chat_id_)
 if Cybercodert == "مميز" and Addictive(msg) then
-send(msg.chat_id_, msg.id_,"[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/mwote)\n — — — — — — — — —\n⌔︙العضو -› ["..data.first_name_.."](t.me/"..(data.username_ or "mwote")..")".."\n⌔︙تم تنزيله من "..RTPA.." هنا\n")  
+send(msg.chat_id_, msg.id_,"[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/roknqa)\n — — — — — — — — —\n⌔︙العضو -› ["..data.first_name_.."](t.me/"..(data.username_ or "roknqa")..")".."\n⌔︙تم تنزيله من "..RTPA.." هنا\n")  
 database:srem(bot_id.."Cybercode:Special:User"..msg.chat_id_,result.sender_user_id_)  
 database:del(bot_id.."Cybercode:Comd:New:rt:User:"..msg.chat_id_..result.sender_user_id_)
 elseif Cybercodert == "ادمن" and Owner(msg) then 
-send(msg.chat_id_, msg.id_,"[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/mwote)\n — — — — — — — — —\n⌔︙العضو -› ["..data.first_name_.."](t.me/"..(data.username_ or "mwote")..")".."\n⌔︙تم تنزيله من "..RTPA.." هنا\n")  
+send(msg.chat_id_, msg.id_,"[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/roknqa)\n — — — — — — — — —\n⌔︙العضو -› ["..data.first_name_.."](t.me/"..(data.username_ or "roknqa")..")".."\n⌔︙تم تنزيله من "..RTPA.." هنا\n")  
 database:srem(bot_id.."Cybercode:Mod:User"..msg.chat_id_,result.sender_user_id_) 
 database:del(bot_id.."Cybercode:Comd:New:rt:User:"..msg.chat_id_..result.sender_user_id_)
 elseif Cybercodert == "مدير" and Constructor(msg) then
-send(msg.chat_id_, msg.id_,"[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/mwote)\n — — — — — — — — —\n⌔︙العضو -› ["..data.first_name_.."](t.me/"..(data.username_ or "mwote")..")".."\n⌔︙تم تنزيله من "..RTPA.." هنا\n")  
+send(msg.chat_id_, msg.id_,"[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/roknqa)\n — — — — — — — — —\n⌔︙العضو -› ["..data.first_name_.."](t.me/"..(data.username_ or "roknqa")..")".."\n⌔︙تم تنزيله من "..RTPA.." هنا\n")  
 database:srem(bot_id.."Cybercode:Manager"..msg.chat_id_,result.sender_user_id_)  
 database:del(bot_id.."Cybercode:Comd:New:rt:User:"..msg.chat_id_..result.sender_user_id_)
 elseif Cybercodert == "عضو" and Addictive(msg) then
-send(msg.chat_id_, msg.id_,"[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/mwote)\n — — — — — — — — —\n⌔︙العضو -› ["..data.first_name_.."](t.me/"..(data.username_ or "mwote")..")".."\n⌔︙تم تنزيله من "..RTPA.." هنا\n")  
+send(msg.chat_id_, msg.id_,"[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/roknqa)\n — — — — — — — — —\n⌔︙العضو -› ["..data.first_name_.."](t.me/"..(data.username_ or "roknqa")..")".."\n⌔︙تم تنزيله من "..RTPA.." هنا\n")  
 end
 end,nil)   
 end   
@@ -3655,19 +3655,19 @@ function py_username(extra, result, success)
 if result.id_ then
 local Cybercodert = database:get(bot_id.."Cybercode:Comd:New:rt:bot:"..text1[2]..msg.chat_id_)
 if Cybercodert == "مميز" and Addictive(msg) then
-send(msg.chat_id_, msg.id_,"[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/mwote)\n — — — — — — — — —\n⌔︙العضو -› ["..result.title_.."](t.me/"..(text1[3] or "mwote")..")".."\n⌔︙تم رفعه "..text1[2].." هنا")   
+send(msg.chat_id_, msg.id_,"[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/roknqa)\n — — — — — — — — —\n⌔︙العضو -› ["..result.title_.."](t.me/"..(text1[3] or "roknqa")..")".."\n⌔︙تم رفعه "..text1[2].." هنا")   
 database:sadd(bot_id.."Cybercode:Special:User"..msg.chat_id_,result.id_)  
 database:set(bot_id.."Cybercode:Comd:New:rt:User:"..msg.chat_id_..result.id_,text1[2])
 elseif Cybercodert == "ادمن" and Owner(msg) then 
-send(msg.chat_id_, msg.id_,"[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/mwote)\n — — — — — — — — —\n⌔︙العضو -› ["..result.title_.."](t.me/"..(text1[3] or "mwote")..")".."\n⌔︙تم رفعه "..text1[2].." هنا")   
+send(msg.chat_id_, msg.id_,"[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/roknqa)\n — — — — — — — — —\n⌔︙العضو -› ["..result.title_.."](t.me/"..(text1[3] or "roknqa")..")".."\n⌔︙تم رفعه "..text1[2].." هنا")   
 database:sadd(bot_id.."Cybercode:Mod:User"..msg.chat_id_,result.id_)  
 database:set(bot_id.."Cybercode:Comd:New:rt:User:"..msg.chat_id_..result.id_,text1[2])
 elseif Cybercodert == "مدير" and Constructor(msg) then
-send(msg.chat_id_, msg.id_,"[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/mwote)\n — — — — — — — — —\n⌔︙العضو -› ["..result.title_.."](t.me/"..(text1[3] or "mwote")..")".."\n⌔︙تم رفعه "..text1[2].." هنا")   
+send(msg.chat_id_, msg.id_,"[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/roknqa)\n — — — — — — — — —\n⌔︙العضو -› ["..result.title_.."](t.me/"..(text1[3] or "roknqa")..")".."\n⌔︙تم رفعه "..text1[2].." هنا")   
 database:sadd(bot_id.."Cybercode:Manager"..msg.chat_id_,result.id_)  
 database:set(bot_id.."Cybercode:Comd:New:rt:User:"..msg.chat_id_..result.id_,text1[2])
 elseif Cybercodert == "عضو" and Addictive(msg) then
-send(msg.chat_id_, msg.id_,"[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/mwote)\n — — — — — — — — —\n⌔︙العضو -› ["..result.title_.."](t.me/"..(text1[3] or "mwote")..")".."\n⌔︙تم رفعه "..text1[2].." هنا")   
+send(msg.chat_id_, msg.id_,"[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/roknqa)\n — — — — — — — — —\n⌔︙العضو -› ["..result.title_.."](t.me/"..(text1[3] or "roknqa")..")".."\n⌔︙تم رفعه "..text1[2].." هنا")   
 end
 else
 info = "⌔︙المعرف غلط"
@@ -3693,19 +3693,19 @@ function py_username(extra, result, success)
 if result.id_ then
 local Cybercodert = database:get(bot_id.."Cybercode:Comd:New:rt:bot:"..text1[2]..msg.chat_id_)
 if Cybercodert == "مميز" and Addictive(msg) then
-send(msg.chat_id_, msg.id_,"[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/mwote)\n — — — — — — — — —\n⌔︙العضو -› ["..result.title_.."](t.me/"..(text1[3] or "mwote")..")".."\n⌔︙تم تنريله من "..text1[2].." هنا")   
+send(msg.chat_id_, msg.id_,"[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/roknqa)\n — — — — — — — — —\n⌔︙العضو -› ["..result.title_.."](t.me/"..(text1[3] or "roknqa")..")".."\n⌔︙تم تنريله من "..text1[2].." هنا")   
 database:srem(bot_id.."Cybercode:Special:User"..msg.chat_id_,result.id_)  
 database:del(bot_id.."Cybercode:Comd:New:rt:User:"..msg.chat_id_..result.id_)
 elseif Cybercodert == "ادمن" and Owner(msg) then 
-send(msg.chat_id_, msg.id_,"[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/mwote)\n — — — — — — — — —\n⌔︙العضو -› ["..result.title_.."](t.me/"..(text1[3] or "mwote")..")".."\n⌔︙تم تنريله من "..text1[2].." هنا")   
+send(msg.chat_id_, msg.id_,"[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/roknqa)\n — — — — — — — — —\n⌔︙العضو -› ["..result.title_.."](t.me/"..(text1[3] or "roknqaroknqaroknqaroknqaroknqaroknqa")..")".."\n⌔︙تم تنريله من "..text1[2].." هنا")   
 database:srem(bot_id.."Cybercode:Mod:User"..msg.chat_id_,result.id_)  
 database:del(bot_id.."Cybercode:Comd:New:rt:User:"..msg.chat_id_..result.id_)
 elseif Cybercodert == "مدير" and Constructor(msg) then
-send(msg.chat_id_, msg.id_,"[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/mwote)\n — — — — — — — — —\n⌔︙العضو -› ["..result.title_.."](t.me/"..(text1[3] or "mwote")..")".."\n⌔︙تم تنريله من "..text1[2].." هنا")   
+send(msg.chat_id_, msg.id_,"[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/roknqa)\n — — — — — — — — —\n⌔︙العضو -› ["..result.title_.."](t.me/"..(text1[3] or "roknqa")..")".."\n⌔︙تم تنريله من "..text1[2].." هنا")   
 database:srem(bot_id.."Cybercode:Manager"..msg.chat_id_,result.id_)  
 database:del(bot_id.."Cybercode:Comd:New:rt:User:"..msg.chat_id_..result.id_)
 elseif Cybercodert == "عضو" and Addictive(msg) then
-send(msg.chat_id_, msg.id_,"[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/mwote)\n — — — — — — — — —\n⌔︙العضو -› ["..result.title_.."](t.me/"..(text1[3] or "mwote")..")".."\n⌔︙تم تنريله من "..text1[2].." هنا")   
+send(msg.chat_id_, msg.id_,"[- Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾 .](https://t.me/roknqa)\n — — — — — — — — —\n⌔︙العضو -› ["..result.title_.."](t.me/"..(text1[3] or "roknqa")..")".."\n⌔︙تم تنريله من "..text1[2].." هنا")   
 end
 else
 info = "⌔︙المعرف غلط"
@@ -3731,11 +3731,11 @@ send(msg.chat_id_, msg.id_,'⌔︙لقد تم تعطيل الحظر و الطر�
 return false
 end
 function Function_Cybercode(extra, result, success)
-if result.sender_user_id_ == tonumber(1308174302) then
+if result.sender_user_id_ == tonumber(7601607055) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
-if result.sender_user_id_ == tonumber(1308174302) then
+if result.sender_user_id_ == tonumber(7601607055) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
@@ -3800,7 +3800,7 @@ return false
 end
 function Function_Cybercode(extra, result, success)
 if result.id_ then
-if result.id_ == tonumber(1308174302) then
+if result.id_ == tonumber(7601607055) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
@@ -3808,7 +3808,7 @@ if result.id_ == tonumber(Id_Sudo) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور البوت \n")
 return false 
 end
-if result.id_ == tonumber(1308174302) then
+if result.id_ == tonumber(7601607055) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
@@ -3860,11 +3860,11 @@ if userid == tonumber(Id_Sudo) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور البوت \n")
 return false 
 end
-if userid == tonumber(1308174302) then
+if userid == tonumber(7601607055) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
-if userid == tonumber(1308174302) then
+if userid == tonumber(7601607055) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
@@ -3970,11 +3970,11 @@ end
 return false
 end
 function Function_Cybercode(extra, result, success)
-if result.sender_user_id_ == tonumber(1308174302) then
+if result.sender_user_id_ == tonumber(7601607055) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس  \n")
 return false 
 end
-if result.sender_user_id_ == tonumber(1308174302) then
+if result.sender_user_id_ == tonumber(7601607055) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس  \n")
 return false 
 end
@@ -4013,7 +4013,7 @@ return false
 end
 function Function_Cybercode(extra, result, success)
 if result.id_ then
-if result.id_ == tonumber(1308174302) then
+if result.id_ == tonumber(7601607055) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
@@ -4045,7 +4045,7 @@ end
 return false
 end
 local userid = text:match("^كتم (%d+)$")
-if userid == tonumber(1308174302) then
+if userid == tonumber(7601607055) then
 send(msg.chat_id_, msg.id_, "⌔︙لا يمكن { حظر،كتم،طرد،تقيد،الخ ..} مطور السورس \n")
 return false 
 end
@@ -6521,7 +6521,7 @@ if b.first_name_ == false then
 send(msg.chat_id_, msg.id_,"⌔︙ حساب المنشئ محذوف")
 return false  
 end
-local UserName = (b.username_ or "mwote")
+local UserName = (b.username_ or "roknqa")
 send(msg.chat_id_, msg.id_,"⌔︙منشئ المجموعه ~ ["..b.first_name_.."](T.me/"..UserName..")")  
 end,nil)   
 end
@@ -6541,7 +6541,7 @@ if b.first_name_ == false then
 send(msg.chat_id_, msg.id_,"⌔︙حساب المنشئ محذوف")
 return false  
 end
-local UserName = (b.username_ or "mwote")
+local UserName = (b.username_ or "roknqa")
 send(msg.chat_id_, msg.id_,"⌔︙تم ترقية منشئ المجموعه ~ ["..b.first_name_.."](T.me/"..UserName..")")  
 database:sadd(bot_id.."creator"..msg.chat_id_,b.id_)
 end,nil)   
@@ -8164,7 +8164,7 @@ if audios.Info == true then
 local Text ='⌔︙تم اختيار المقطع الصوتي لك'
 keyboard = {} 
 keyboard.inline_keyboard = {
-{{text = '- Cybercode TeAM .',url="t.me/mwote"}},
+{{text = '- Cybercode TeAM .',url="t.me/roknqa"}},
 }
 local msg_id = msg.id_/2097152/0.5
 https.request("https://api.telegram.org/bot"..token..'/sendVoice?chat_id=' .. msg.chat_id_ .. '&voice='..URL.escape(audios.info)..'&caption=' .. URL.escape(Text).."&reply_to_message_id="..msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
@@ -8500,9 +8500,9 @@ Text = [[
 *- Cybercode Team .*
  — — — — — — — — — 
      
-[⌔︙ Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾  .](http://t.me/mwote)
+[⌔︙ Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾  .](http://t.me/roknqa)
      
-[⌔︙ Cybercode Developer .](http://t.me/kmhhh)
+[⌔︙ Cybercode Developer .](http://t.me/tahiakl)
 ]]
 send(msg.chat_id_, msg.id_,Text)
 end
@@ -8538,7 +8538,7 @@ Text = [[
 ⌔︙ م4 -› لعرض اوامر المنشئين
 ⌔︙ م5 -› لعرض اوامر المطورين
  — — — — — — — — — 
-[⌔︙Ch Source](t.me/mwote)
+[⌔︙Ch Source](t.me/roknqa)
 ]]
 send(msg.chat_id_, msg.id_,Text)
 return false
@@ -8585,7 +8585,7 @@ Text = [[
 ⌔︙الكلايش
 ⌔︙السيلفي
  — — — — — — — — — 
-[⌔︙Ch Source](t.me/mwote)
+[⌔︙Ch Source](t.me/roknqa)
 ]]
 send(msg.chat_id_, msg.id_,Text)
 return false
@@ -8657,7 +8657,7 @@ Text = [[
 ⌔︙مسح الصلاحيات
 ⌔︙مسح الرابط
  — — — — — — — — — 
-[⌔︙Ch Source](t.me/mwote)
+[⌔︙Ch Source](t.me/roknqa)
 ]]
 send(msg.chat_id_, msg.id_,Text)
 return false
@@ -8704,7 +8704,7 @@ Text = [[
 ⌔︙تفعيل/تعطيل اوامر التحشيش
 ⌔︙تفعيل/تعطيل الرابط/جلب الرابط
  — — — — — — — — — 
-[⌔︙Ch Source](t.me/mwote)
+[⌔︙Ch Source](t.me/roknqa)
 ]]
 send(msg.chat_id_, msg.id_,Text)
 return false
@@ -8740,7 +8740,7 @@ Text = [[
 ⌔︙اضف رسائل + العدد بالرد
 ⌔︙اضف مجوهرات + العدد بالرد
  — — — — — — — — — 
-[⌔︙Ch Source](t.me/mwote)
+[⌔︙Ch Source](t.me/roknqa)
 ]]
 send(msg.chat_id_, msg.id_,Text)
 return false
@@ -8790,7 +8790,7 @@ Text = [[
 ⌔︙رفع/تنزيل منشئ اساسي
 ⌔︙مسح المنشئين الاساسين
  — — — — — — — — — 
-[⌔︙Ch Source](t.me/mwote)
+[⌔︙Ch Source](t.me/roknqa)
 ]]
 send(msg.chat_id_, msg.id_,Text)
 return false
@@ -9321,7 +9321,7 @@ local A = io.open("sudo.lua", 'w')
 A:write([[
 s = "BGBBB"
 
-q = "mwote"
+q = "roknqa"
 
 token = "]]..token..[["
 
@@ -9636,7 +9636,7 @@ local idchci = "-100"..idch
 local animation = DAata:match("^animation(.*)$"):gsub('chatid',''):gsub('chatid',''):gsub(idch,''):gsub('-100','')
 local Text ="⌔︙تم اللغاء منعها بنجاح"
 inline = {
-{{text = '⌔︙ Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾  .',url='http://t.me/mwote'}},
+{{text = '⌔︙ Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾  .',url='http://t.me/roknqa'}},
 }
 https.request("https://api.telegram.org/bot"..token.."/deleteMessage?chat_id="..Chat_id.."&message_id="..msg_idd)
 send_inlin_key(Chat_id,Text,inline)
@@ -9647,7 +9647,7 @@ local idchci = database:get(bot_id.."Cybercode:Filter:msg")
 local photo = DAata:match("^pito(.*)$")
 local Text ="⌔︙تم اللغاء منعها بنجاح"
 inline = {
-{{text = '⌔︙ Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾  .',url='http://t.me/mwote'}},
+{{text = '⌔︙ Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾  .',url='http://t.me/roknqa'}},
 }
 https.request("https://api.telegram.org/bot"..token.."/deleteMessage?chat_id="..Chat_id.."&message_id="..msg_idd)
 send_inlin_key(Chat_id,Text,inline)
@@ -9659,7 +9659,7 @@ local idchci = "-100"..idch
 local Sticker = DAata:match("^Sticker(.*)$"):gsub('chatid',''):gsub('chatid',''):gsub(idch,''):gsub('-100','')
 local Text ="⌔︙تم اللغاء منعه بنجاح"
 inline = {
-{{text = '⌔︙ Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾  .',url='http://t.me/mwote'}},
+{{text = '⌔︙ Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾  .',url='http://t.me/roknqa'}},
 }
 https.request("https://api.telegram.org/bot"..token.."/deleteMessage?chat_id="..Chat_id.."&message_id="..msg_idd)
 send_inlin_key(Chat_id,Text,inline)
@@ -9669,7 +9669,7 @@ if DAata and DAata:match("^delallSticker(.*)$") and Addictive(data) then
 local delallSticker = DAata:match("^delallSticker(.*)$")
 local Text ="⌔︙تم اللغاء منع كل المتحركات"
 inline = {
-{{text = '⌔︙ Cybercode 𝖲𝗈𝗎𝗋𝖼??  .',url='http://t.me/mwote'}},
+{{text = '⌔︙ Cybercode 𝖲𝗈𝗎𝗋𝖼??  .',url='http://t.me/roknqa'}},
 }
 https.request("https://api.telegram.org/bot"..token.."/deleteMessage?chat_id="..Chat_id.."&message_id="..msg_idd)
 send_inlin_key(Chat_id,Text,inline)
@@ -9682,7 +9682,7 @@ if DAata and DAata:match("^delallanimation(.*)$") and Addictive(data) then
 local delallmation = DAata:match("^delallanimation(.*)$")
 local Text ="⌔︙تم اللغاء منع كل المتحركات"
 inline = {
-{{text = '⌔︙ Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾  .',url='http://t.me/mwote'}},
+{{text = '⌔︙ Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾  .',url='http://t.me/roknqa'}},
 }
 https.request("https://api.telegram.org/bot"..token.."/deleteMessage?chat_id="..Chat_id.."&message_id="..msg_idd)
 send_inlin_key(Chat_id,Text,inline)
@@ -9695,7 +9695,7 @@ if DAata and DAata:match("^delallph(.*)$") and Addictive(data) then
 local delallph = DAata:match("^delallph(.*)$")
 local Text ="⌔︙تم اللغاء منع كل الصور"
 inline = {
-{{text = '⌔︙ Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾  .',url='http://t.me/mwote'}},
+{{text = '⌔︙ Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾  .',url='http://t.me/roknqa'}},
 }
 https.request("https://api.telegram.org/bot"..token.."/deleteMessage?chat_id="..Chat_id.."&message_id="..msg_idd)
 send_inlin_key(Chat_id,Text,inline)
@@ -9825,7 +9825,7 @@ local Name_Bot = (database:get(bot_id.."Cybercode:Name:Bot") or "سايبر كو
 if not database:get(bot_id.."Cybercode:Fun_Bots"..msg.chat_id_) then
 if text ==  ""..Name_Bot..' شنو رئيك بهاذا' and tonumber(msg.reply_to_message_id_) > 0 then     
 function FunBot(extra, result, success) 
-local Fun = {'لوكي وزاحف من ساع زحفلي وحضرته 😒','خوش ولد و ورده مال الله 🙄','يلعب ع البنات 🙄', 'ولد زايعته الكاع 😶🙊','صاك يخبل ومعضل ','محلو وشواربه جنها مكناسه 😂🤷🏼‍♀️','اموت عليه 🌝','هوه غير الحب مال اني ❤️','مو خوش ولد صراحه ☹️','ادبسز وميحترم البنات  ', 'فد واحد قذر 🙄😒','ماطيقه كل ما اكمشه ريحته جنها بخاخ بف باف مال حشرات 😂🤷‍♀️','مو خوش ولد 🤓' } 
+local Fun = {'لوكي وزاحف من ساع زحفلي وحضرته 😒','خوش ولد و ورده مال الله 🙄','يلعب ع البنات 🙄', 'ولد زايعته الكاع 😶🙊','صاك يخبل ومعضل ','محلو وشواقوته جنها مكناسه 😂🤷🏼‍♀️','اموت عليه 🌝','هوه غير الحب مال اني ❤️','مو خوش ولد صراحه ☹️','ادبسز وميحترم البنات  ', 'فد واحد قذر 🙄😒','ماطيقه كل ما اكمشه ريحته جنها بخاخ بف باف مال حشرات 😂🤷‍♀️','مو خوش ولد 🤓' } 
 send(msg.chat_id_, result.id_,''..Fun[math.random(#Fun)]..'')   
 end   
 tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumber(msg.reply_to_message_id_)}, FunBot, nil)
@@ -9853,7 +9853,7 @@ database:incr(bot_id..'Cybercode:message_edit'..result.chat_id_..result.sender_u
 local Text = result.content_.text_
 if database:get(bot_id.."Cybercode:Lock:edit"..msg.chat_id_) and not Text and not BasicConstructor(result) then
 local list = database:smembers(bot_id.."Cybercode:Basic:Constructor"..msg.chat_id_)
-t = "⌔︙ المنشئين الاساسين تعالو مخرب \n — — — — — — — — — \n"
+t = "⌔︙ المنشئين الاساسين تعالو مخقوت \n — — — — — — — — — \n"
 for k,v in pairs(list) do
 local username = database:get(bot_id.."Cybercode:User:Name" .. v)
 if username then
@@ -10021,9 +10021,9 @@ end
 if (data.ID == "UpdateOption" and data.value_.value_ == "Ready") then
 print("\27[34m"..[[
 >> The Bot is Running
->> Bot source > Cybercode
->>Source channel > @mwote
->>Source developer > @kmhhh
+>> Bot source > Mike
+>>Source channel > @roknqa
+>>Source developer > tahikal
 
 
 ]].."\27[m")
