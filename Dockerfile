@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     liblua5.3-dev \
     libssl-dev \
+    openssl \
     libcurl4-openssl-dev \
     unzip \
     wget
@@ -25,9 +26,9 @@ RUN wget https://luarocks.org/releases/luarocks-3.9.2.tar.gz && \
     ./configure --with-lua-include=/usr/include/lua5.3 && \
     make && make install
 
-# تثبيت مكتبات Lua عبر Luarocks
+# تثبيت مكتبات Lua عبر Luarocks مع دعم OpenSSL
 RUN luarocks install luasocket && \
-    luarocks install luasec OPENSSL_LIBDIR=/usr/lib/x86_64-linux-gnu OPENSSL_INCDIR=/usr/include/openssl && \
+    luarocks install luasec OPENSSL_DIR=/usr && \
     luarocks install redis-lua && \
     luarocks install dkjson
 
@@ -39,3 +40,4 @@ COPY start.lua /app/start.lua
 
 # تشغيل Redis ثم تشغيل البوت
 CMD ["bash", "-c", "redis-server --daemonize yes && lua /app/start.lua"]
+
