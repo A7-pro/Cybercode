@@ -1,5 +1,5 @@
 -- تحميل المكتبات المطلوبة
-local redis = dofile("/app/File_Libs/redis.lua").connect("127.0.0.1", 6379)  -- تعديل المسار
+local redis = dofile("/app/File_Libs/redis.lua").connect("127.0.0.1", 6379)
 local serpent = dofile("/app/File_Libs/serpent.lua")
 local JSON = dofile("/app/File_Libs/dkjson.lua")
 local json = dofile("/app/File_Libs/JSON.lua")
@@ -10,15 +10,13 @@ local http = require("socket.http")
 -- الحصول على معلومات الخادم
 local Server_Done = io.popen("echo $SSH_CLIENT | awk '{ print $1}'"):read('*a'):gsub('[\n\r]+', '')
 local User = io.popen("whoami"):read('*a'):gsub('[\n\r]+', '')
-local IP = io.popen("curl -s ifconfig.me"):read('*a'):gsub('[\n\r]+', '')  -- تم التعديل
+local IP = io.popen("curl -s ifconfig.me"):read('*a'):gsub('[\n\r]+', '') 
 local Port = io.popen("echo ${SSH_CLIENT} | awk '{ print $3 }'"):read('*a'):gsub('[\n\r]+', '')
 
 -- دالة لإنشاء ملف sudo.lua
 local function Create_Info(Token, Sudo)
-    local Write_Info_Sudo = io.open("/app/sudo.lua", 'w')  -- تعديل المسار
+    local Write_Info_Sudo = io.open("/app/sudo.lua", 'w')
     Write_Info_Sudo:write(string.format([[ 
-s = "mwote"
-q = "kmhhh"
 token = "%s"
 Sudo = %s
 ]], Token, Sudo))
@@ -27,7 +25,6 @@ end
 
 -- دالة لكتابة البيانات تلقائيًا
 local function AutoFiles_Write()
-    -- التحقق من وجود Token في Redis
     if not redis:get(Server_Done.."Token_Write") then
         print("\27[1;34m»» Send Your Token Bot :\27[m")
         local token = io.read()
@@ -37,39 +34,33 @@ local function AutoFiles_Write()
                 redis:set(Server_Done.."Token_Write", token)
             else
                 print("\27[1;31mInvalid Token!\27[0;39;49m")
-                os.exit()  -- إنهاء التشغيل عند إدخال توكن غير صالح
+                os.exit()
             end
         end
-        os.execute('lua /app/start.lua')  
-        os.exit()  -- إنهاء العملية الحالية بعد التشغيل
+        os.execute('lua /app/start.lua')
+        os.exit()
     end
 
-    -- التحقق من وجود UserSudo في Redis
     if not redis:get(Server_Done.."UserSudo_Write") then
         print("\27[1;34mSend Your Id Sudo :\27[m")
         local Id = io.read():gsub(' ','') 
         if tostring(Id):match('%d+') then
             redis:set(Server_Done.."UserSudo_Write", Id)
         end
-        os.execute('lua /app/start.lua')  
-        os.exit()  
+        os.execute('lua /app/start.lua')
+        os.exit()
     end
 
-    -- **إعادة إنشاء sudo.lua في كل تشغيل**
     Create_Info(redis:get(Server_Done.."Token_Write"), redis:get(Server_Done.."UserSudo_Write"))
 end
 
--- دالة لتحميل الملف sudo.lua إذا كان موجودًا
 local function Load_File()
-    local f = io.open("/app/sudo.lua", "r")  -- تعديل المسار
+    local f = io.open("/app/sudo.lua", "r")
     if not f then
-        AutoFiles_Write()  -- إذا لم يوجد الملف، قم بكتابة البيانات
+        AutoFiles_Write()
     else
-        f:close()  
-        os.execute('lua /app/start.lua')  -- إعادة تشغيل البوت بعد تحميل sudo.lua
-        os.exit()  
+        f:close()
     end
 end
 
--- استدعاء الدالة للتحقق من وجود sudo.lua والقيام بالإجراءات اللازمة
 Load_File()
