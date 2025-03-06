@@ -1,9 +1,6 @@
 services:
   - type: web
     name: Cybercode
-    env: ubuntu
-    buildCommand: |
-      apt-get update && apt-get install -y lua5.2
-    startCommand: lua Cybercode.lua
+    env: docker
     plan: free
     autoDeploy: true
