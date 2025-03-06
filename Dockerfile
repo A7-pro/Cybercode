@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y \
     unzip \
     wget
 
-# التحقق من وجود lua وتحديد الإصدار الصحيح
+# التأكد من استخدام Lua 5.3 كإصدار افتراضي
 RUN ln -sf /usr/bin/lua5.3 /usr/bin/lua
 
 # تنزيل وتثبيت LuaRocks يدويًا
@@ -27,18 +27,15 @@ RUN wget https://luarocks.org/releases/luarocks-3.9.2.tar.gz && \
 
 # تثبيت مكتبات Lua عبر Luarocks
 RUN luarocks install luasocket && \
-    luarocks install luasec && \
+    luarocks install luasec OPENSSL_LIBDIR=/usr/lib/x86_64-linux-gnu OPENSSL_INCDIR=/usr/include/openssl && \
     luarocks install redis-lua && \
     luarocks install dkjson
 
 # تعيين مجلد العمل
 WORKDIR /app
 
-# نسخ جميع الملفات إلى الحاوية
-COPY . /app
-
-# إعطاء الصلاحيات لملف التشغيل
-RUN chmod +x start.sh
+# نسخ الملفات المطلوبة إلى الحاوية
+COPY start.lua /app/start.lua
 
 # تشغيل Redis ثم تشغيل البوت
-CMD ["bash", "-c", "redis-server --daemonize yes && lua cybercode.lua"]
+CMD ["bash", "-c", "redis-server --daemonize yes && lua /app/start.lua"]
