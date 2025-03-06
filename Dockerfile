@@ -28,23 +28,22 @@ RUN wget https://luarocks.org/releases/luarocks-3.9.2.tar.gz && \
 
 # تثبيت مكتبات Lua عبر Luarocks مع دعم OpenSSL
 RUN luarocks install luasocket && \
-    luarocks install luasec OPENSSL_DIR=/usr && \
+    luarocks install luasec OPENSSL_LIBDIR=/usr/lib OPENSSL_INCDIR=/usr/include/openssl && \
     luarocks install redis-lua && \
     luarocks install dkjson
 
 # تعيين مجلد العمل
 WORKDIR /app
 
-# نسخ جميع الملفات المطلوبة إلى الحاوية (تشمل ملفات File_Libs، start.lua، وملفات أخرى)
+# نسخ جميع الملفات المطلوبة إلى الحاوية
 COPY File_Libs /app/File_Libs
 COPY start.lua /app/start.lua
 COPY sudo.lua /app/sudo.lua
 COPY tg /app/tg
 COPY Cybercode.lua /app/Cybercode.lua
-COPY Dockerfile /app/Dockerfile
 COPY Fastinstall.sh /app/Fastinstall.sh
 COPY install.sh /app/install.sh
 COPY render.yaml /app/render.yaml
 
 # تشغيل Redis ثم تشغيل البوت
-CMD ["bash", "-c", "redis-server --daemonize yes && lua /app/start.lua"]
+CMD bash -c "redis-server & sleep 2 && lua /app/start.lua"
