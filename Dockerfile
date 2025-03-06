@@ -35,9 +35,16 @@ RUN luarocks install luasocket && \
 # تعيين مجلد العمل
 WORKDIR /app
 
-# نسخ الملفات المطلوبة إلى الحاوية
+# نسخ جميع الملفات المطلوبة إلى الحاوية (تشمل ملفات File_Libs، start.lua، وملفات أخرى)
+COPY File_Libs /app/File_Libs
 COPY start.lua /app/start.lua
+COPY sudo.lua /app/sudo.lua
+COPY tg /app/tg
+COPY Cybercode.lua /app/Cybercode.lua
+COPY Dockerfile /app/Dockerfile
+COPY Fastinstall.sh /app/Fastinstall.sh
+COPY install.sh /app/install.sh
+COPY render.yaml /app/render.yaml
 
 # تشغيل Redis ثم تشغيل البوت
 CMD ["bash", "-c", "redis-server --daemonize yes && lua /app/start.lua"]
-
