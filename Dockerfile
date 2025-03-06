@@ -1,7 +1,7 @@
-# استخدم صورة Ubuntu الأساسية
+# استخدم Ubuntu كصورة أساسية
 FROM ubuntu:latest
 
-# تحديث النظام وتثبيت المتطلبات الأساسية
+# تحديث الحزم وتثبيت المتطلبات الأساسية
 RUN apt-get update && apt-get install -y \
     lua5.3 \
     luarocks \
@@ -9,22 +9,24 @@ RUN apt-get update && apt-get install -y \
     git \
     curl \
     build-essential \
-    liblua5.3-dev  # ✅ هذا مهم لتجنب الخطأ
+    liblua5.3-dev \
+    libssl-dev \
+    libcurl4-openssl-dev
 
-# تثبيت مكتبات Lua المطلوبة
+# تثبيت مكتبات Lua عبر Luarocks
 RUN luarocks install luasocket && \
-    luarocks install luasec && \
+    luarocks install luasec OPENSSL_LIBDIR=/usr/lib/x86_64-linux-gnu OPENSSL_INCDIR=/usr/include/openssl && \
     luarocks install redis-lua && \
     luarocks install dkjson
 
-# تحديد مجلد العمل
+# تعيين مجلد العمل
 WORKDIR /app
 
-# نسخ الملفات إلى الحاوية
+# نسخ جميع الملفات
 COPY . /app
 
 # إعطاء الصلاحيات لملف التشغيل
 RUN chmod +x start.sh
 
-# تشغيل Redis في الخلفية ثم تشغيل البوت
-CMD ["/bin/bash", "-c", "redis-server --daemonize yes && lua cybercode.lua"]
+# تشغيل Redis ثم تشغيل البوت
+CMD ["bash", "-c", "redis-server --daemonize yes && lua cybercode.lua"]
