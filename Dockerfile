@@ -15,8 +15,8 @@ RUN apt-get update && apt-get install -y \
     unzip \
     wget
 
-# تعيين Lua 5.3 كإصدار افتراضي
-RUN update-alternatives --install /usr/bin/lua lua /usr/bin/lua5.3 1
+# التحقق من وجود lua وتحديد الإصدار الصحيح
+RUN if ! command -v lua &> /dev/null; then ln -s /usr/bin/lua5.3 /usr/bin/lua; fi
 
 # تنزيل وتثبيت LuaRocks بشكل يدوي (إذا كان الإصدار المرفق به مشاكل)
 RUN wget https://luarocks.org/releases/luarocks-3.9.2.tar.gz && \
@@ -42,3 +42,4 @@ RUN chmod +x start.sh
 
 # تشغيل Redis ثم تشغيل البوت
 CMD ["bash", "-c", "redis-server --daemonize yes && lua cybercode.lua"]
+
