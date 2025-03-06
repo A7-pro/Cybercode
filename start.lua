@@ -11,7 +11,7 @@ local User = io.popen("whoami"):read('*a'):gsub('[\n\r]+', '')
 local IP = io.popen("dig +short myip.opendns.com @resolver1.opendns.com"):read('*a'):gsub('[\n\r]+', '')
 local Port = io.popen("echo ${SSH_CLIENT} | awk '{ print $3 }'"):read('*a'):gsub('[\n\r]+', '')
 
-local function Create_Info(Token, Sudo)  
+local function Create_Info(Token, Sudo)
     local Write_Info_Sudo = io.open("sudo.lua", 'w')
     Write_Info_Sudo:write(string.format([[
 s = "mwote"
@@ -20,7 +20,7 @@ token = "%s"
 Sudo = %s
 ]], Token, Sudo))
     Write_Info_Sudo:close()
-end  
+end
 
 local function AutoFiles_Write()
     if not redis:get(Server_Done.."Token_Write") then
@@ -46,11 +46,17 @@ local function AutoFiles_Write()
         os.execute('lua start.lua')
     end
 
-    Create_Info(redis:get(Server_Done.."Token_Write"), redis:get(Server_Done.."UserSudo_Write"))   
+    Create_Info(redis:get(Server_Done.."Token_Write"), redis:get(Server_Done.."UserSudo_Write"))
 end
 
-local function Load_File()  
-    local f = io.open("./sudo.lua", "r")  
-    if not f then   
-        AutoFiles_Write()  
-    else   
+local function Load_File()
+    local f = io.open("./sudo.lua", "r")
+    if not f then
+        AutoFiles_Write()
+    else
+        f:close()
+    end
+end
+
+-- Call Load_File to check for the existence of sudo.lua and proceed accordingly.
+Load_File()
