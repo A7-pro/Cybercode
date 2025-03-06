@@ -10,7 +10,7 @@ local http = require("socket.http")
 -- الحصول على معلومات الخادم
 local Server_Done = io.popen("echo $SSH_CLIENT | awk '{ print $1}'"):read('*a'):gsub('[\n\r]+', '')
 local User = io.popen("whoami"):read('*a'):gsub('[\n\r]+', '')
-local IP = io.popen("dig +short myip.opendns.com @resolver1.opendns.com"):read('*a'):gsub('[\n\r]+', '')
+local IP = io.popen("curl -s ifconfig.me"):read('*a'):gsub('[\n\r]+', '')  -- تم التعديل
 local Port = io.popen("echo ${SSH_CLIENT} | awk '{ print $3 }'"):read('*a'):gsub('[\n\r]+', '')
 
 -- دالة لإنشاء ملف sudo.lua
@@ -37,9 +37,11 @@ local function AutoFiles_Write()
                 redis:set(Server_Done.."Token_Write", token)
             else
                 print("\27[1;31mInvalid Token!\27[0;39;49m")
+                os.exit()  -- إنهاء التشغيل عند إدخال توكن غير صالح
             end
         end
-        os.execute('lua /app/start.lua')  -- تعديل المسار
+        os.execute('lua /app/start.lua')  
+        os.exit()  -- إنهاء العملية الحالية بعد التشغيل
     end
 
     -- التحقق من وجود UserSudo في Redis
@@ -49,10 +51,11 @@ local function AutoFiles_Write()
         if tostring(Id):match('%d+') then
             redis:set(Server_Done.."UserSudo_Write", Id)
         end
-        os.execute('lua /app/start.lua')  -- تعديل المسار
+        os.execute('lua /app/start.lua')  
+        os.exit()  
     end
 
-    -- إنشاء ملف sudo.lua باستخدام البيانات المخزنة في Redis
+    -- **إعادة إنشاء sudo.lua في كل تشغيل**
     Create_Info(redis:get(Server_Done.."Token_Write"), redis:get(Server_Done.."UserSudo_Write"))
 end
 
@@ -62,7 +65,9 @@ local function Load_File()
     if not f then
         AutoFiles_Write()  -- إذا لم يوجد الملف، قم بكتابة البيانات
     else
-        f:close()  -- إذا كان موجودًا، أغلقه
+        f:close()  
+        os.execute('lua /app/start.lua')  -- إعادة تشغيل البوت بعد تحميل sudo.lua
+        os.exit()  
     end
 end
 
