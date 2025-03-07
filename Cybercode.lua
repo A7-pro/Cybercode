@@ -9916,7 +9916,7 @@ elseif data and data.ID and data.ID == "UpdateMessageEdited" then
         end
     end)
 end
-if #list == 0 then
+if list and #list == 0 then
 t = "⌔︙ مافيه مشرفين الحمدلله  "
 end
 Reply_Status(result,result.sender_user_id_,"reply","⌔︙قام بالتعديل على الميديا"..t)  
