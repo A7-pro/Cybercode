@@ -7540,7 +7540,7 @@ name = string.gsub(name,"نشيط","كسول")
 name = string.gsub(name,"شبعان","جوعان")
 name = string.gsub(name,"موعطشان","عطشان")
 name = string.gsub(name, "كفو", "موب كفو")
-name = string.gsub(name,انا,انت)
+name = string.gsub(name, "انا", "انت")
 name = string.gsub(name,"هادئ","عصبي")
 send(msg.chat_id_, msg.id_,"⌔︙اسرع واحد يرسل العكس ~ {"..name.."}")
 return false
