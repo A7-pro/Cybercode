@@ -9921,7 +9921,6 @@ t = "⌔︙ مافيه مشرفين الحمدلله  "
 end
 Reply_Status(result,result.sender_user_id_,"reply","⌔︙قام بالتعديل على الميديا"..t)  
 DeleteMessage(result.chat_id_,{[0] = data.message_id_}) 
-end
 local text = result.content_.text_
 if not Addictive(result) then
 ------------------------------------------------------------------------
