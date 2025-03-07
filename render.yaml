@@ -8,8 +8,8 @@ services:
       luarocks install luasec
       luarocks install redis-lua
       luarocks install dkjson
-      pip3 install flask
-    startCommand: python3 /app/server.py
+      pip3 install flask gunicorn
+    startCommand: gunicorn -w 1 -b 0.0.0.0:$PORT server:app
     plan: free
     autoDeploy: true
     envVars:
