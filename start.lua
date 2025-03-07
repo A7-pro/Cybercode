@@ -1,15 +1,13 @@
 local socket = require("socket")
 
--- تشغيل البوت في خلفية منفصلة
-local function run_bot()
-  os.execute("lua /app/Cybercode.lua")
+os.execute("lua /app/Cybercode.lua &")
+print("Started Cybercode.lua in background...")
+
+local server, err = socket.bind("0.0.0.0", 8080)
+if not server then
+  print("Failed to bind server: " .. (err or "unknown error"))
+  os.exit(1)
 end
-
-local co = coroutine.create(run_bot)
-coroutine.resume(co)
-
--- إنشاء سيرفر ويب بسيط باستخدام LuaSocket على المنفذ 8080
-local server = assert(socket.bind("0.0.0.0", 8080))
 print("HTTP server is listening on port 8080...")
 
 while true do
