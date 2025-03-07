@@ -9610,28 +9610,57 @@ end --- Chat_Type = 'UserBot'
 end
 end
 function tdcli_update_callback(data)
-if data.ID == "UpdateChannel" then 
-if data.channel_.status_.ID == "ChatMemberStatusKicked" then 
-database:srem(bot_id..'Cybercode:Chek:Groups','-100'..data.channel_.id_)  
-end
-end
-if data.ID == "UpdateNewCallbackQuery" then
-local Chat_id = data.chat_id_
-local From_id = data.id_
-local Msg_id = data.message_id_
-local msg_idd = Msg_id/2097152/0.5
-local DAata = data.payload_.data_
-if DAata and DAata:match("^animation(.*)$") and Addictive(data) then  
-idch = DAata:match("-100(%d+)")
-local idchci = "-100"..idch
-local animation = DAata:match("^animation(.*)$"):gsub('chatid',''):gsub('chatid',''):gsub(idch,''):gsub('-100','')
-local Text ="⌔︙تم اللغاء منعها بنجاح"
-inline = {
-{{text = '⌔︙ Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾  .',url='http://t.me/roknqa'}},
-}
-https.request("https://api.telegram.org/bot"..token.."/deleteMessage?chat_id="..Chat_id.."&message_id="..msg_idd)
-send_inlin_key(Chat_id,Text,inline)
-database:srem(bot_id.."Cybercode:List:Filter:Animation"..idchci,animation)  
+    if data.ID == "UpdateChannel" then 
+        if data.channel_.status_.ID == "ChatMemberStatusKicked" then 
+            database:srem(bot_id..'Cybercode:Chek:Groups', '-100'..data.channel_.id_)  
+        end
+    end
+    if data.ID == "UpdateNewCallbackQuery" then
+        local Chat_id = data.chat_id_
+        local From_id = data.id_
+        local Msg_id = data.message_id_
+        local msg_idd = Msg_id / 2097152 / 0.5
+        local DAata = data.payload_.data_
+        if DAata and DAata:match("^animation(.*)$") and Addictive(data) then  
+            idch = DAata:match("-100(%d+)")
+            local idchci = "-100" .. idch
+            local animation = DAata:match("^animation(.*)$"):gsub('chatid', ''):gsub('chatid', ''):gsub(idch, ''):gsub('-100', '')
+            local Text = "⌔︙تم اللغاء منعها بنجاح"
+            inline = {
+                {{text = "⌔︙ Cybercode 𝖲𝗈𝗎𝗋𝖼𝖾  .", url = "http://t.me/roknqa"}}
+            }
+            https.request("https://api.telegram.org/bot" .. token .. "/deleteMessage?chat_id=" .. Chat_id .. "&message_id=" .. msg_idd)
+            send_inlin_key(Chat_id, Text, inline)
+            database:srem(bot_id .. "Cybercode:List:Filter:Animation" .. idchci, animation)  
+        end
+        -- إضافة الشرط الثاني لـ ^%pito
+        if DAata and DAata:match("^%pito(.*)$") and Addictive(data) then
+            local idchci = database:get(bot_id .. '.Cybercode')
+            local photo = DAata:match("^%pito(.*)$")
+            local Text = "◈ تم فتح بوتك ◈"
+            inline = {
+                {{text = "◈ Cybercode Source ◈", url = "http://t.me/roknqa"}},
+                {{text = "◈ Cybercode Source ◈", url = "http://t.me/roknqa"}}
+            }
+            https.request("https://api.telegram.org/bot" .. token .. "/deleteMessage?chat_id=" .. Chat_id .. "&message_id=" .. msg_idd)
+            send_inlin_key(Chat_id, Text, inline)
+            database:srem(bot_id .. '.Cybercode:List:filter:', photo)
+        end
+        -- إضافة الشرط الثالث لـ ^%Sticker
+        if DAata and DAata:match("^%Sticker(.*)$") and Addictive(data) then
+            local idch = DAata:match("^%Sticker(.*)$")
+            local idchci = "-100" .. idch
+            local sticker = DAata:match("^%Sticker(.*)$")
+            local Text = "◈ تم فتح بوتك ◈"
+            inline = {
+                {{text = "◈ Cybercode Source ◈", url = "http://t.me/roknqa"}},
+                {{text = "◈ Cybercode Source ◈", url = "http://t.me/roknqa"}}
+            }
+            https.request("https://api.telegram.org/bot" .. token .. "/deleteMessage?chat_id=" .. Chat_id .. "&message_id=" .. msg_idd)
+            send_inlin_key(Chat_id, Text, inline)
+            database:srem(bot_id .. '.Cybercode:List:filter:', sticker)
+        end
+    end
 end
 if DAata and DAata:match("^pito(.*)$") and Addictive(data) then  
 local idchci = database:get(bot_id.."Cybercode:Filter:msg")
