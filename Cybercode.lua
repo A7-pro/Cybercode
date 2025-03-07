@@ -10093,7 +10093,8 @@ end
 if (msg.content_.photo_) then
 if msg.content_.photo_.sizes_[0] then
 id_photo = msg.content_.photo_.sizes_[0].photo_.persistent_id_
-endlocal id_photo = nil -- تأكد من تعريف المتغير مسبقًا
+end
+local id_photo = nil  -- تأكد من تعريف المتغير مسبقًا
 
 if msg.content_ and msg.content_.photo_ and msg.content_.photo_.sizes_ then
     if msg.content_.photo_.sizes_[1] then
