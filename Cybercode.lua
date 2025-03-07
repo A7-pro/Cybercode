@@ -10001,7 +10001,7 @@ end
 end
 ------------------------------------------------------------------------
 if text then
-    local Cybercode_Msg = database:sismember(bot_id.."Cybercode:List:Filter:text"..result.chat_id_,text) 
+    local Cybercode_Msg = database:sismember(bot_id.."Cybercode:List:Filter:text"..result.chat_id_, text)
     if Cybercode_Msg then    
         Reply_Status(result, result.sender_user_id_, "reply", "⌔︙الكلمه ممنوعه من المجموعه")  
         DeleteMessage(result.chat_id_, {[0] = data.message_id_})     
@@ -10010,30 +10010,33 @@ if text then
 end -- إغلاق if الأساسية للنص
 
 if msg.content_.ID == 'MessageAnimation' then    
-    local Animation_Msg = database:sismember(bot_id.."Cybercode:List:Filter:Animation"..result.chat_id_, result.content_.animation_.animation_.persistent_id_) 
+    local Animation_Msg = database:sismember(bot_id.."Cybercode:List:Filter:Animation"..result.chat_id_, result.content_.animation_.animation_.persistent_id_)
     if Animation_Msg then    
         Reply_Status(result, result.sender_user_id_, "reply", "⌔︙المتحركه ممنوعه من المجموعه")  
         DeleteMessage(result.chat_id_, {[0] = data.message_id_})     
         return false
     end -- إغلاق if الخاصة بالمتحركة
 end -- إغلاق if الأساسية للمحتوى المتحرك
+
 if msg.content_.ID == 'MessagePhoto' then    
-local Photo_Msg = database:sismember(bot_id.."Cybercode:List:Filter:Photo"..result.chat_id_,result.content_.photo_.sizes_[1].photo_.persistent_id_) 
-if Photo_Msg then    
-Reply_Status(result,result.sender_user_id_,"reply","⌔︙الصوره ممنوعه من المجموعه")  
-DeleteMessage(result.chat_id_, {[0] = data.message_id_})     
-return false
+    local Photo_Msg = database:sismember(bot_id.."Cybercode:List:Filter:Photo"..result.chat_id_, result.content_.photo_.sizes_[1].photo_.persistent_id_)
+    if Photo_Msg then    
+        Reply_Status(result, result.sender_user_id_, "reply", "⌔︙الصوره ممنوعه من المجموعه")  
+        DeleteMessage(result.chat_id_, {[0] = data.message_id_})     
+        return false
+    end
 end
-end
+
 if msg.content_.ID == 'MessageSticker' then    
-local Sticker_Msg = database:sismember(bot_id.."Cybercode:List:Filter:Sticker"..result.chat_id_,result.content_.sticker_.sticker_.persistent_id_) 
-if Sticker_Msg then    
-Reply_Status(result,result.sender_user_id_,"reply","⌔︙الملصق ممنوع من المجموعه")  
-DeleteMessage(result.chat_id_, {[0] = data.message_id_})     
-return false
+    local Sticker_Msg = database:sismember(bot_id.."Cybercode:List:Filter:Sticker"..result.chat_id_, result.content_.sticker_.sticker_.persistent_id_) 
+    if Sticker_Msg then    
+        Reply_Status(result, result.sender_user_id_, "reply", "⌔︙الملصق ممنوع من المجموعه")  
+        DeleteMessage(result.chat_id_, {[0] = data.message_id_})     
+        return false
+    end
 end
-end
-------------------------------------------------------------------------
+
+-- التثبيت في حالة النص مطابق للمحفوظ
 elseif (data and data.ID and data.ID == "UpdateMessageSendSucceeded") then
     local msg = data.message_
     if msg and msg.content_ then
@@ -10048,20 +10051,6 @@ elseif (data and data.ID and data.ID == "UpdateMessageSendSucceeded") then
                 end
             end, nil)
         end
-elseif data and data.ID and data.ID == "UpdateMessageSendSucceeded" then
-    local msg = data.message_
-    if msg and msg.content_ then
-        local text = msg.content_.text_ or ""
-        local Get_Msg_Pin = database:get(bot_id..'Cybercode:Msg:Pin:Chat'..msg.chat_id_)
-        
-        -- في حالة النص مطابق للمحفوظ يتم تثبيته
-        if Get_Msg_Pin and text == Get_Msg_Pin then
-            tdcli_function({ID = "PinChannelMessage", channel_id_ = msg.chat_id_:gsub('-100',''), message_id_ = msg.id_, disable_notification_ = 0}, function(arg, d) 
-                if d.ID == 'Ok' then
-                    database:del(bot_id..'Cybercode:Msg:Pin:Chat'..msg.chat_id_)
-                end
-            end, nil)
-        end
         
         -- في حالة الملصق مطابق للمحفوظ يتم تثبيته
         if msg.content_.sticker_ then
@@ -10071,7 +10060,7 @@ elseif data and data.ID and data.ID == "UpdateMessageSendSucceeded" then
                 end, nil)   
             end
         end
-
+        
         -- في حالة المتحركة (GIF) مطابقة للمحفوظ يتم تثبيتها
         if msg.content_.animation_ then
             if Get_Msg_Pin == msg.content_.animation_.animation_.persistent_id_ then
@@ -10084,68 +10073,30 @@ elseif data and data.ID and data.ID == "UpdateMessageSendSucceeded" then
         print("⚠️ خطأ: الرسالة غير متاحة أو لا تحتوي على محتوى!")
     end
 end
-end
-if (msg.content_.animation_) then 
-if msg.content_.animation_.animation_.persistent_id_ == Get_Msg_Pin then
-tdcli_function ({ID = "PinChannelMessage",channel_id_ = msg.chat_id_:gsub('-100',''),message_id_ = msg.id_,disable_notification_ = 0},function(arg,d) database:del(bot_id..'Cybercode:Msg:Pin:Chat'..msg.chat_id_) end,nil)   
-end
-end
-if (msg.content_.photo_) then
-if msg.content_.photo_.sizes_[0] then
-id_photo = msg.content_.photo_.sizes_[0].photo_.persistent_id_
-end
-local id_photo = nil  -- تأكد من تعريف المتغير مسبقًا
 
-if msg.content_ and msg.content_.photo_ and msg.content_.photo_.sizes_ then
-    if msg.content_.photo_.sizes_[1] then
-        id_photo = msg.content_.photo_.sizes_[1].photo_.persistent_id_
-    end
-    if msg.content_.photo_.sizes_[2] then
-        id_photo = msg.content_.photo_.sizes_[2].photo_.persistent_id_
-    end	
-    if msg.content_.photo_.sizes_[3] then
-        id_photo = msg.content_.photo_.sizes_[3].photo_.persistent_id_
+-- في حالة الصور (Photos)
+if msg.content_.photo_ then
+    if msg.content_.photo_.sizes_[0] then
+        id_photo = msg.content_.photo_.sizes_[0].photo_.persistent_id_
     end
 
-    if id_photo and id_photo == Get_Msg_Pin then
-        tdcli_function({ID = "PinChannelMessage", channel_id_ = msg.chat_id_:gsub('-100',''), message_id_ = msg.id_, disable_notification_ = 0}, function(arg, d) 
-            database:del(bot_id..'Cybercode:Msg:Pin:Chat'..msg.chat_id_)
-        end, nil)   
+    if msg.content_ and msg.content_.photo_ and msg.content_.photo_.sizes_ then
+        if msg.content_.photo_.sizes_[1] then
+            id_photo = msg.content_.photo_.sizes_[1].photo_.persistent_id_
+        end
+        if msg.content_.photo_.sizes_[2] then
+            id_photo = msg.content_.photo_.sizes_[2].photo_.persistent_id_
+        end    
+        if msg.content_.photo_.sizes_[3] then
+            id_photo = msg.content_.photo_.sizes_[3].photo_.persistent_id_
+        end
+
+        if id_photo and id_photo == Get_Msg_Pin then
+            tdcli_function({ID = "PinChannelMessage", channel_id_ = msg.chat_id_:gsub('-100',''), message_id_ = msg.id_, disable_notification_ = 0}, function(arg, d) 
+                database:del(bot_id..'Cybercode:Msg:Pin:Chat'..msg.chat_id_)
+            end, nil)   
+        end
     end
-end -- إغلاق الفحص على msg.content_
-if (data.ID == "UpdateOption" and data.value_.value_ == "Ready") then
-  print("\27[34m"..[[
->> The Bot is Running
->> Bot source > Mike
->>Source channel > @roknqa
->>Source developer > tahikal
-]].."\27[m")
-  local list = database:smembers(bot_id..'Cybercode:UsersBot')  
-  for k,v in pairs(list) do 
-    tdcli_function({ID='GetChat', chat_id_ = v}, function(arg,data) end, nil) 
-  end 
-  local list = database:smembers(bot_id..'Cybercode:Chek:Groups') 
-  for k,v in pairs(list) do 
-    tdcli_function({ID='GetChat', chat_id_ = v}, function(arg,data)
-      if data and data.type_ and data.type_.channel_ and data.type_.channel_.status_ and data.type_.channel_.status_.ID == "ChatMemberStatusMember" then
-        tdcli_function ({ID = "ChangeChatMemberStatus", chat_id_=v, user_id_=bot_id, status_={ID = "ChatMemberStatusLeft"}}, function(e,g) end, nil) 
-        database:srem(bot_id..'Cybercode:Chek:Groups', v)  
-      end
-      if data and data.type_ and data.type_.channel_ and data.type_.channel_.status_ and data.type_.channel_.status_.ID == "ChatMemberStatusLeft" then
-        database:srem(bot_id..'Cybercode:Chek:Groups', v)  
-      end
-      if data and data.type_ and data.type_.channel_ and data.type_.channel_.status_ and data.type_.channel_.status_.ID == "ChatMemberStatusKicked" then
-        database:srem(bot_id..'Cybercode:Chek:Groups', v)  
-      end
-      if data and data.code_ and data.code_ == 400 then
-        database:srem(bot_id..'Cybercode:Chek:Groups', v)  
-      end
-      if data and data.type_ and data.type_.channel_ and data.type_.channel_.status_ and data.type_.channel_.status_.ID == "ChatMemberStatusEditor" then
-        database:sadd(bot_id..'Cybercode:Chek:Groups', v)  
-      end 
-    end, nil)
-  end
-  CleangGroups()
 end
 
 -- إضافة حلقة رئيسية لاستمرارية البوت
