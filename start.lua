@@ -1,4 +1,4 @@
--- تحميل المكتبات المطلوبة-- تحميل المكتبات المطلوبة
+-- تحميل المكتبات المطلوبة
 local redis = dofile("/app/File_Libs/redis.lua").connect("127.0.0.1", 6379)
 local serpent = dofile("/app/File_Libs/serpent.lua")
 local JSON = dofile("/app/File_Libs/dkjson.lua")
@@ -13,8 +13,8 @@ os.execute("redis-server --daemonize yes")
 -- مهلة قصيرة للتأكد من أن Redis يعمل قبل تشغيل البوت
 os.execute("sleep 2")
 
--- جلب IP بدون `dig`
-local IP = io.popen("curl -s ifconfig.me"):read('*a'):gsub('[\n\r]+', '')
+-- فتح منفذ زائف حتى لا يوقف Render البوت
+os.execute("nohup python3 -m http.server 8080 &")
 
 -- تشغيل البوت
 os.execute("lua /app/Cybercode.lua")
