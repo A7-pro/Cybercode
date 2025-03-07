@@ -3,12 +3,13 @@ services:
     name: Cybercode
     env: ubuntu
     buildCommand: |
-      apt-get update && apt-get install -y lua5.3 luarocks redis-server curl python3
+      apt-get update && apt-get install -y lua5.3 luarocks redis-server curl python3 python3-pip
       luarocks install luasocket
       luarocks install luasec
       luarocks install redis-lua
       luarocks install dkjson
-    startCommand: bash -c "redis-server --daemonize yes && python3 -m http.server 8080 --bind 0.0.0.0 & lua /app/start.lua"
+      pip3 install flask
+    startCommand: bash -c "redis-server --daemonize yes && python3 /app/server.py & lua /app/start.lua"
     plan: free
     autoDeploy: true
     envVars:
