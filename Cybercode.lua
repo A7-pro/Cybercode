@@ -9919,7 +9919,11 @@ end
 if list and #list == 0 then
 t = "⌔︙ مافيه مشرفين الحمدلله  "
 end
-Reply_Status(result,result.sender_user_id_,"reply","⌔︙قام بالتعديل على الميديا"..t)  
+if result and result.sender_user_id_ then
+    Reply_Status(result, result.sender_user_id_, "reply", "⌔︙قام بالتعديل على الميديا"..t)
+else
+    print("⚠️ خطأ: المتغير 'result' غير موجود أو غير معرف بشكل صحيح.")
+end
 DeleteMessage(result.chat_id_,{[0] = data.message_id_}) 
 local text = result.content_.text_
 if not Addictive(result) then
