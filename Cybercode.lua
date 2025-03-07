@@ -36,7 +36,6 @@ port :: ]]..port..[[
 
 time ::]]..Rtime.."\27[m")
 
-end
 print(t)
 function vardump(value)  
 print(serpent.block(value, {comment=false}))   
