@@ -14,6 +14,7 @@ RUN apt-get update && apt-get upgrade -y && \
       wget \
       libssl-dev \
       liblua5.3-dev \
+      libconfig-dev \
       build-essential \
       gcc \
       make \
@@ -33,8 +34,6 @@ RUN git clone --recursive https://github.com/vysheng/tg.git /tmp/tg && \
 
 # ضبط متغيرات البيئة
 ENV LUA_INCDIR=/usr/include/lua5.3
-ENV OPENSSL_INCDIR=/usr/include/openssl
-ENV OPENSSL_LIBDIR=/usr/lib/x86_64-linux-gnu
 ENV PATH="/usr/local/bin:$PATH"
 
 # تثبيت مكتبات Lua عبر luarocks مع تحديد إصدار Lua 5.3
@@ -50,11 +49,11 @@ RUN pip3 install --no-cache-dir --upgrade pip setuptools wheel && \
 # تعيين مجلد العمل
 WORKDIR /app
 
-# نسخ جميع الملفات المطلوبة إلى الحاوية
+# نسخ الملفات من المستودع إلى الحاوية
 COPY . /app
 
-# إعطاء صلاحيات التنفيذ لملف البوت (Cybercode.lua أو start.lua حسب اختيارك)
-RUN chmod +x /app/start.lua
+# إعطاء صلاحيات التنفيذ لملف البوت (Cybercode.lua)
+RUN chmod +x /app/Cybercode.lua
 
 # تشغيل Redis ثم تشغيل البوت
-CMD ["bash", "-c", "redis-server --daemonize yes && lua /app/start.lua"]
+CMD ["bash", "-c", "redis-server --daemonize yes && lua /app/Cybercode.lua"]
