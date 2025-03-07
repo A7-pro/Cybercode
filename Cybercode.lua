@@ -7321,7 +7321,7 @@ database:del(bot_id.."Tshak:Set:Sma"..msg.chat_id_)
 Random = {"🍏","🍎","🍐","🍊","🍋","🍉","🍇","🍓","🍈","🍒","🍑","🍍","🥥","🥝","🍅","🍆","🥑","🥦","🥒","🌶","🌽","🥕","🥔","🥖","??","🍞","🥨","🍟","🧀","🥚","🍳","🥓","🥩","🍗","🍖","🌭","🍔","🍠","🍕","🥪","🥙","☕️","🍵","🥤","🍶","🍺","🍻","🏀","⚽️","🏈","⚾️","🎾","🏐","🏉","🎱","🏓","🏸","🥅","🎰","🎮","🎳","🎯","🎲","🎻","🎸","🎺","🥁","🎹","🎼","🎧","🎤","🎬","🎨","🎭","🎪","🎟","⌔","🎗","🏵","⌔","🏆","🥌","🛷","🚗","🚌","🏎","🚓","🚑","🚚","🚛","🚜","🇮🇶","⚔","🛡","🔮","🌡","💣","⌔","📍","📓","📗","⌔","📅","📪","⌔","⌔","📭","⏰","📺","🎚","☎️","⌔"}
 SM = Random[math.random(#Random)]
 database:set(bot_id.."Tshak:Random:Sm"..msg.chat_id_,SM)
-send(msg.chat_id_, msg.id_,"⌔︙اسرع واحد يدز هاذا السمايل ? ~ {`"..SM.."`}")
+send(msg.chat_id_, msg.id_,"⌔︙اسرع واحد يرسل هاذا السمايل ? ~ {`"..SM.."`}")
 return false
 end
 end
@@ -7491,7 +7491,7 @@ name = string.gsub(name,"زرافه","🦒")
 name = string.gsub(name,"قنفذ","🦔")
 name = string.gsub(name,"تفاحه","🍎")
 name = string.gsub(name,"باذنجان","🍆")
-send(msg.chat_id_, msg.id_,"⌔︙اسرع واحد يدز معنى السمايل ~ {"..name.."}")
+send(msg.chat_id_, msg.id_,"⌔︙اسرع واحد يرسل معنى السمايل ~ {"..name.."}")
 return false
 end
 end
@@ -7514,10 +7514,10 @@ return false
 end
 if database:get(bot_id.."Tshak:Lock:Games"..msg.chat_id_) then
 database:del(bot_id.."Tshak:Set:Aks"..msg.chat_id_)
-katu = {"باي","فهمت","موزين","اسمعك","احبك","موحلو","نضيف","حاره","ناصي","جوه","سريع","ونسه","طويل","سمين","ضعيف","شريف","شجاع","رحت","عدل","نشيط","شبعان","موعطشان","خوش ولد","اني","هادئ"}
+katu = {"باي","فهمت","موزين","اسمعك","احبك","موحلو","نضيف","حاره","ناصي","جوه","سريع","ونسه","طويل","سمين","ضعيف","شريف","شجاع","رحت","عدل","نشيط","شبعان","موعطشان",كفو,انا,"هادئ"}
 name = katu[math.random(#katu)]
 database:set(bot_id.."Tshak:Set:Aks:Game"..msg.chat_id_,name)
-name = string.gsub(name,"باي","هلو")
+name = string.gsub(name,"باي","هاي")
 name = string.gsub(name,"فهمت","مافهمت")
 name = string.gsub(name,"موزين","زين")
 name = string.gsub(name,"اسمعك","ماسمعك")
@@ -7532,17 +7532,17 @@ name = string.gsub(name,"ونسه","ضوجه")
 name = string.gsub(name,"طويل","قزم")
 name = string.gsub(name,"سمين","ضعيف")
 name = string.gsub(name,"ضعيف","قوي")
-name = string.gsub(name,"شريف","كواد")
+name = string.gsub(name,"شريف",غدار)
 name = string.gsub(name,"شجاع","جبان")
 name = string.gsub(name,"رحت","اجيت")
 name = string.gsub(name,"عدل","ميت")
 name = string.gsub(name,"نشيط","كسول")
 name = string.gsub(name,"شبعان","جوعان")
 name = string.gsub(name,"موعطشان","عطشان")
-name = string.gsub(name,"خوش ولد","موخوش ولد")
-name = string.gsub(name,"اني","مطي")
+name = string.gsub(name,كفو,موب كفو)
+name = string.gsub(name,انا,انت)
 name = string.gsub(name,"هادئ","عصبي")
-send(msg.chat_id_, msg.id_,"⌔︙اسرع واحد يدز العكس ~ {"..name.."}")
+send(msg.chat_id_, msg.id_,"⌔︙اسرع واحد يرسل العكس ~ {"..name.."}")
 return false
 end
 end
@@ -7682,7 +7682,7 @@ name = string.gsub(name,"🕒","🕒🕒🕒🕒🕒🕒🕓🕒🕒🕒")
 name = string.gsub(name,"🕤","🕥🕥🕥🕥🕥🕤🕥🕥🕥")
 name = string.gsub(name,"⌛️","⏳⏳⏳⏳⏳⏳⌛️⏳⏳")
 name = string.gsub(name,"📅","📆📆📆📆📆📆📅📆📆")
-send(msg.chat_id_, msg.id_,"⌔︙اسرع واحد يدز الاختلاف ~ {"..name.."}")
+send(msg.chat_id_, msg.id_,"⌔︙اسرع واحد يرسل الاختلاف ~ {"..name.."}")
 return false
 end
 end
@@ -9723,7 +9723,6 @@ local listPhoto = database:smembers(bot_id.."Cybercode:List:Filter:Photo"..delal
 for k,v in pairs(listPhoto) do  
 database:srem(bot_id.."Cybercode:List:Filter:Photo"..delallph,v)  
 end  
-end
 end
 if (data.ID == "UpdateNewMessage") then
 local msg = data.message_
