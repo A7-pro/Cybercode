@@ -9841,27 +9841,51 @@ data.message_.content_.text_ = (NewCmmd or data.message_.content_.text_)
 end
 end
 local Name_Bot = (database:get(bot_id.."Cybercode:Name:Bot") or "سايبر كود")
+
 if not database:get(bot_id.."Cybercode:Fun_Bots"..msg.chat_id_) then
-if text ==  ""..Name_Bot..' شنو رئيك بهاذا' and tonumber(msg.reply_to_message_id_) > 0 then     
-function FunBot(extra, result, success) 
-local Fun = {'لوكي وزاحف من ساع زحفلي وحضرته 😒','خوش ولد و ورده مال الله 🙄','يلعب ع البنات 🙄', 'ولد زايعته الكاع 😶🙊','صاك يخبل ومعضل ','محلو وشواقوته جنها مكناسه 😂🤷🏼‍♀️','اموت عليه 🌝','هوه غير الحب مال اني ❤️','مو خوش ولد صراحه ☹️','ادبسز وميحترم البنات  ', 'فد واحد قذر 🙄😒','ماطيقه كل ما اكمشه ريحته جنها بخاخ بف باف مال حشرات 😂🤷‍♀️','مو خوش ولد 🤓' } 
-send(msg.chat_id_, result.id_,''..Fun[math.random(#Fun)]..'')   
-end   
-tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumber(msg.reply_to_message_id_)}, FunBot, nil)
-return false
-end  
-if text == ""..Name_Bot..' شنو رئيك بهاي' and tonumber(msg.reply_to_message_id_) > 0 then    
-function FunBot(extra, result, success) 
-local Fun = {'الكبد مال اني هيه ','ختولي ماحبها ','خانتني ويه صديقي 😔','بس لو الكفها اله اعضها 💔','خوش بنيه بس عده مكسرات زايده وناقصه منا ومنا وهيه تدري بنفسها 😒','جذابه ومنافقه سوتلي مشكله ويه الحب مالتي ','ئووووووووف اموت ع ربها ','ديرو بالكم منها تلعب ع الولد 😶 ضحكت ع واحد قطته ايفون 7 ','صديقتي وختي وروحي وحياتي ','فد وحده منحرفه 😥','ساكنه بالعلاوي ونته حدد بعد لسانها لسان دلاله 🙄🤐','ام سحوره سحرت اخويا وعلكته 6 سنوات 🤕','ماحبها 🙁','بله هاي جهره تسئل عليها ؟ ','بربك ئنته والله فارغ وبطران وماعدك شي تسوي جاي تسئل ع بنات العالم ولي يله 🏼','ياخي بنيه حبوبه بس لبعرك معمي عليها تشرب هواي 😹' } 
-send(msg.chat_id_,result.id_,''..Fun[math.random(#Fun)]..'') 
-end  
-tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumber(msg.reply_to_message_id_)}, FunBot, nil)
-return false
-end    
+    if text == ""..Name_Bot..' وش رايك به؟' and tonumber(msg.reply_to_message_id_) > 0 then     
+        function FunBot(extra, result, success) 
+            local Fun = {
+                'والله إنه ريال كفو ويستاهل كل خير 💪🔥',
+                'كويس لكن أحسه ينكب أحيانا 😂',
+                'ما أدري عنه، بس شكله طيب 🤷‍♂️',
+                'ولد ناس ومحترم، الله يوفقه 🤲',
+                'معروف عنه إنه مزعج شوي 🤣',
+                'صاحب واجب وما يقصر مع أحد 👏',
+                'مدري، بس شكله يحب الزحف 😂',
+                'رجال والنعم فيه، الله يسعده 🙌',
+                'دائماً متكي بالمطاعم، فلوسه كلها تروح ع الأكل 🤣'
+            }
+            send(msg.chat_id_, result.id_, ''..Fun[math.random(#Fun)]..'')   
+        end   
+        tdcli_function ({ID = "GetMessage", chat_id_ = msg.chat_id_, message_id_ = tonumber(msg.reply_to_message_id_)}, FunBot, nil)
+        return false
+    end  
+
+    if text == ""..Name_Bot..' وش رايك فيها؟' and tonumber(msg.reply_to_message_id_) > 0 then    
+        function FunBot(extra, result, success) 
+            local Fun = {
+                'بنت محترمة وأخلاقها عالية 👏',
+                'مزعجة شوي بس قلبها طيب 🤷‍♂️',
+                'مدري عنها، بس شكلها واثقة من نفسها 🤔',
+                'بنت كفو، تستاهل كل خير 🌸',
+                'ياخي مشكلتها تحب الدراما كثير 😂',
+                'إنسانة رائعة، الله يوفقها 🤲',
+                'أحسها دايم متفاعلة بزيادة 😅',
+                'مزحة حلوة بس إذا عصبت، الله يستر منها 🤣',
+                'ما تعجبني شخصيتها، بس كل واحد وذوقه 👀'
+            } 
+            send(msg.chat_id_, result.id_, ''..Fun[math.random(#Fun)]..'') 
+        end  
+        tdcli_function ({ID = "GetMessage", chat_id_ = msg.chat_id_, message_id_ = tonumber(msg.reply_to_message_id_)}, FunBot, nil)
+        return false
+    end    
 end
+
 if text and text:match('^'..Name_Bot..' ') then
-data.message_.content_.text_ = data.message_.content_.text_:gsub('^'..Name_Bot..' ','')
+    data.message_.content_.text_ = data.message_.content_.text_:gsub('^'..Name_Bot..' ', '')
 end
+
 elseif data and data.ID and data.ID == "UpdateMessageEdited" then
     local msg = data
     tdcli_function ({ID = "GetMessage", chat_id_ = msg.chat_id_, message_id_ = tonumber(msg.message_id_)}, function(extra, result, success)
@@ -9877,7 +9901,7 @@ elseif data and data.ID and data.ID == "UpdateMessageEdited" then
             local list = database:smembers(bot_id.."Cybercode:Basic:Constructor"..msg.chat_id_)
             if list and #list > 0 then
                 local t = "⌔︙ المنشئين الاساسين تعالو  \n — — — — — — — — — \n"
-                for k,v in pairs(list) do
+                for k, v in pairs(list) do
                     local username = database:get(bot_id.."Cybercode:User:Name" .. v)
                     if username then
                         t = t..""..k.."- ([@"..username.."])\n"
@@ -9891,9 +9915,6 @@ elseif data and data.ID and data.ID == "UpdateMessageEdited" then
             end
         end
     end)
-else
-t = t..""..k.."- (`"..v.."`)\n"
-end
 end
 if #list == 0 then
 t = "⌔︙ مافيه مشرفين الحمدلله  "
