@@ -10033,7 +10033,6 @@ DeleteMessage(result.chat_id_, {[0] = data.message_id_})
 return false
 end
 end
-end
 ------------------------------------------------------------------------
 elseif (data and data.ID and data.ID == "UpdateMessageSendSucceeded") then
     local msg = data.message_
