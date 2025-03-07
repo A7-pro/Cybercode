@@ -10010,35 +10010,42 @@ end
 end
 end
 if (data.ID == "UpdateOption" and data.value_.value_ == "Ready") then
-print("\27[34m"..[[
+  print("\27[34m"..[[
 >> The Bot is Running
 >> Bot source > Mike
 >>Source channel > @roknqa
 >>Source developer > tahikal
-
-
 ]].."\27[m")
-local list = database:smembers(bot_id..'Cybercode:UsersBot')  
-for k,v in pairs(list) do 
-tdcli_function({ID='GetChat',chat_id_ = v},function(arg,data) end,nil) 
-end 
-local list = database:smembers(bot_id..'Cybercode:Chek:Groups') 
-for k,v in pairs(list) do 
-tdcli_function({ID='GetChat',chat_id_ = v},function(arg,data)
-if data and data.type_ and data.type_.channel_ and data.type_.channel_.status_ and data.type_.channel_.status_.ID == "ChatMemberStatusMember" then
-tdcli_function ({ID = "ChangeChatMemberStatus",chat_id_=v,user_id_=bot_id,status_={ID = "ChatMemberStatusLeft"},},function(e,g) end, nil) 
-database:srem(bot_id..'Cybercode:Chek:Groups',v)  
+  local list = database:smembers(bot_id..'Cybercode:UsersBot')  
+  for k,v in pairs(list) do 
+    tdcli_function({ID='GetChat', chat_id_ = v}, function(arg,data) end, nil) 
+  end 
+  local list = database:smembers(bot_id..'Cybercode:Chek:Groups') 
+  for k,v in pairs(list) do 
+    tdcli_function({ID='GetChat', chat_id_ = v}, function(arg,data)
+      if data and data.type_ and data.type_.channel_ and data.type_.channel_.status_ and data.type_.channel_.status_.ID == "ChatMemberStatusMember" then
+        tdcli_function ({ID = "ChangeChatMemberStatus", chat_id_=v, user_id_=bot_id, status_={ID = "ChatMemberStatusLeft"}}, function(e,g) end, nil) 
+        database:srem(bot_id..'Cybercode:Chek:Groups', v)  
+      end
+      if data and data.type_ and data.type_.channel_ and data.type_.channel_.status_ and data.type_.channel_.status_.ID == "ChatMemberStatusLeft" then
+        database:srem(bot_id..'Cybercode:Chek:Groups', v)  
+      end
+      if data and data.type_ and data.type_.channel_ and data.type_.channel_.status_ and data.type_.channel_.status_.ID == "ChatMemberStatusKicked" then
+        database:srem(bot_id..'Cybercode:Chek:Groups', v)  
+      end
+      if data and data.code_ and data.code_ == 400 then
+        database:srem(bot_id..'Cybercode:Chek:Groups', v)  
+      end
+      if data and data.type_ and data.type_.channel_ and data.type_.channel_.status_ and data.type_.channel_.status_.ID == "ChatMemberStatusEditor" then
+        database:sadd(bot_id..'Cybercode:Chek:Groups', v)  
+      end 
+    end, nil)
+  end
+  CleangGroups()
 end
-if data and data.type_ and data.type_.channel_ and data.type_.channel_.status_ and data.type_.channel_.status_.ID == "ChatMemberStatusLeft" then
-database:srem(bot_id..'Cybercode:Chek:Groups',v)  
+
+-- إضافة حلقة رئيسية لاستمرارية البوت
+local socket = require("socket")
+while true do
+  socket.sleep(1) -- تأخير لتجنب استهلاك المعالج
 end
-if data and data.type_ and data.type_.channel_ and data.type_.channel_.status_ and data.type_.channel_.status_.ID == "ChatMemberStatusKicked" then
-database:srem(bot_id..'Cybercode:Chek:Groups',v)  
-end
-if data and data.code_ and data.code_ == 400 then
-database:srem(bot_id..'Cybercode:Chek:Groups',v)  
-end
-if data and data.type_ and data.type_.channel_ and data.type_.channel_.status_ and data.type_.channel_.status_.ID == "ChatMemberStatusEditor" then
-database:sadd(bot_id..'Cybercode:Chek:Groups',v)  
-end end,nil)
-end;CleangGroups();end;end
