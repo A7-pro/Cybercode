@@ -1,12 +1,23 @@
-FROM lua:5.3.6
+FROM lua:5.3-slim
 
-# تحديث النظام وتثبيت الحزم الضرورية
+# تحديث الحزم وتثبيت المتطلبات الأساسية
 RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y redis-server curl git wget pkg-config libssl-dev libreadline-dev python3 python3-pip unzip && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# تثبيت luarocks (إذا لم يكن مثبتاً بالفعل)
-RUN apt-get update && apt-get install -y luarocks && \
+    apt-get install -y --no-install-recommends \
+    luarocks \
+    redis-server \
+    curl \
+    python3 \
+    python3-pip \
+    git \
+    unzip \
+    wget \
+    libssl-dev \
+    liblua5.3-dev \
+    build-essential \
+    gcc \
+    make \
+    pkg-config \
+    libreadline-dev && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # ضبط متغيرات البيئة لمسارات المكتبات
@@ -15,7 +26,7 @@ ENV OPENSSL_INCDIR=/usr/include/openssl
 ENV OPENSSL_LIBDIR=/usr/lib/x86_64-linux-gnu
 ENV PATH="/usr/local/bin:$PATH"
 
-# تثبيت مكتبات Lua عبر luarocks
+# تثبيت مكتبات Lua عبر Luarocks
 RUN luarocks install luasocket && \
     luarocks install luasec OPENSSL_LIBDIR=$OPENSSL_LIBDIR OPENSSL_INCDIR=$OPENSSL_INCDIR && \
     luarocks install redis-lua && \
