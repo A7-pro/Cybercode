@@ -26,10 +26,10 @@ RUN apt-get update && apt-get upgrade -y && \
       zlib1g-dev && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# تثبيت Telegram CLI
+# تثبيت Telegram CLI مع تعطيل تحويل التحذيرات إلى أخطاء
 RUN git clone --recursive https://github.com/vysheng/tg.git /tmp/tg && \
     cd /tmp/tg && \
-    ./configure && make && \
+    ./configure && make CFLAGS="-Wno-error" && \
     mv /tmp/tg/bin/telegram-cli /usr/local/bin/ && \
     rm -rf /tmp/tg
 
@@ -37,7 +37,7 @@ RUN git clone --recursive https://github.com/vysheng/tg.git /tmp/tg && \
 ENV LUA_INCDIR=/usr/include/lua5.3
 ENV PATH="/usr/local/bin:$PATH"
 
-# تثبيت مكتبات Lua عبر luarocks مع تحديد إصدار Lua 5.3
+# تثبيت مكتبات Lua عبر luarocks مع تحديد إصدار Lua 5.3 واستخدام OPENSSL_DIR
 RUN luarocks install luasocket --lua-version=5.3 && \
     luarocks install luasec 0.8-1 --lua-version=5.3 OPENSSL_DIR=/usr && \
     luarocks install redis-lua --lua-version=5.3 && \
@@ -53,8 +53,8 @@ WORKDIR /app
 # نسخ جميع الملفات المطلوبة إلى الحاوية
 COPY . /app
 
-# إعطاء صلاحيات التنفيذ لملف البوت (Cybercode.lua)
-RUN chmod +x /app/Cybercode.lua
+# إعطاء صلاحيات التنفيذ لملف البوت (Cybercode.lua أو start.lua حسب مشروعك)
+RUN chmod +x /app/start.lua
 
 # تشغيل Redis ثم تشغيل البوت
-CMD ["bash", "-c", "redis-server --daemonize yes && lua /app/Cybercode.lua"]
+CMD ["bash", "-c", "redis-server --daemonize yes && lua /app/start.lua"]
