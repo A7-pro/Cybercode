@@ -9724,7 +9724,11 @@ for k,v in pairs(listPhoto) do
 database:srem(bot_id.."Cybercode:List:Filter:Photo"..delallph,v)  
 end  
 end
-if (data.ID == "UpdateNewMessage") then
+if data and data.ID == "UpdateNewMessage" then
+    -- تابع تنفيذ الكود
+else
+    print("⚠️ تحذير: data غير معرّفة أو لا تحتوي على ID!")
+end
 local msg = data.message_
 local text = msg.content_.text_
 if msg.date_ and msg.date_ < tonumber(os.time() - 30) then
