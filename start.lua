@@ -6,6 +6,7 @@ local json = dofile("/app/File_Libs/JSON.lua")
 local URL = dofile("/app/File_Libs/url.lua")
 local https = require("ssl.https")
 local http = require("socket.http")
+local socket = require("socket")
 
 -- تشغيل Redis
 os.execute("redis-server --daemonize yes")
@@ -13,8 +14,9 @@ os.execute("redis-server --daemonize yes")
 -- مهلة قصيرة للتأكد من أن Redis يعمل قبل تشغيل البوت
 os.execute("sleep 2")
 
--- تشغيل خادم وهمي حتى لا يتوقف Render
-os.execute("nohup python3 -m http.server 8080 > /dev/null 2>&1 &")
+-- فتح منفذ 8080 بشكل صحيح ليستمع له Render
+local server = socket.bind("0.0.0.0", 8080)
+server:settimeout(nil)
 
 -- تشغيل البوت
 os.execute("lua /app/Cybercode.lua")
