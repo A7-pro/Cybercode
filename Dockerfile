@@ -3,17 +3,17 @@ FROM ubuntu:latest
 
 # تحديث الحزم وتثبيت المتطلبات الأساسية
 RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y lua5.3 luarocks redis-server curl python3 python3-pip git unzip wget && \
+    apt-get install -y lua5.3 luarocks redis-server curl python3 python3-pip git unzip wget libssl-dev && \
     luarocks path
 
-# تثبيت مكتبات Lua عبر Luarocks
+# التأكد من إعداد `luarocks` بشكل صحيح قبل التثبيت
 RUN luarocks install luasocket && \
-    luarocks install luasec && \
+    luarocks install luasec OPENSSL_LIBDIR=/usr/lib OPENSSL_INCDIR=/usr/include/openssl && \
     luarocks install redis-lua && \
     luarocks install dkjson
 
 # تثبيت مكتبات Python المطلوبة
-RUN pip3 install --upgrade pip setuptools wheel && \
+RUN pip3 install --no-cache-dir --upgrade pip setuptools wheel && \
     pip3 install flask gunicorn
 
 # تعيين مجلد العمل
