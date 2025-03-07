@@ -10035,12 +10035,18 @@ end
 end
 end
 ------------------------------------------------------------------------
-elseif (data.ID == "UpdateMessageSendSucceeded") then
-local msg = data.message_
-local text = msg.content_.text_
-local Get_Msg_Pin = database:get(bot_id..'Cybercode:Msg:Pin:Chat'..msg.chat_id_)
-if Get_Msg_Pin ~= nil then
-if text == Get_Msg_Pin then
+elseif data and data.ID and data.ID == "UpdateMessageSendSucceeded" then
+    local msg = data.message_
+    if msg and msg.content_ then
+        local text = msg.content_.text_ or ""
+        local Get_Msg_Pin = database:get(bot_id..'Cybercode:Msg:Pin:Chat'..msg.chat_id_)
+        if Get_Msg_Pin and text == Get_Msg_Pin then
+            tdcli_function ({ID = "PinChannelMessage", chat_id_ = msg.chat_id_, message_id_ = msg.id_}, dl_cb, nil)
+        end
+    else
+        print("⚠️ خطأ: الرسالة غير متاحة أو لا تحتوي على محتوى!")
+    end
+end
 tdcli_function ({ID = "PinChannelMessage",channel_id_ = msg.chat_id_:gsub('-100',''),message_id_ = msg.id_,disable_notification_ = 0},function(arg,d) if d.ID == 'Ok' then;database:del(bot_id..'Cybercode:Msg:Pin:Chat'..msg.chat_id_);end;end,nil)   
 elseif (msg.content_.sticker_) then 
 if Get_Msg_Pin == msg.content_.sticker_.sticker_.persistent_id_ then
