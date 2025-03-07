@@ -9862,21 +9862,35 @@ end
 if text and text:match('^'..Name_Bot..' ') then
 data.message_.content_.text_ = data.message_.content_.text_:gsub('^'..Name_Bot..' ','')
 end
-------------------------------------------------------------------------
-Cybercode_Started_Bot(msg,data)
-Cybercode_Files(msg)
-elseif (data.ID == "UpdateMessageEdited") then
-local msg = data
-tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumber(msg.message_id_)},function(extra, result, success)
-database:incr(bot_id..'Cybercode:message_edit'..result.chat_id_..result.sender_user_id_)
-local Text = result.content_.text_
-if database:get(bot_id.."Cybercode:Lock:edit"..msg.chat_id_) and not Text and not BasicConstructor(result) then
-local list = database:smembers(bot_id.."Cybercode:Basic:Constructor"..msg.chat_id_)
-t = "⌔︙ المنشئين الاساسين تعالو  \n — — — — — — — — — \n"
-for k,v in pairs(list) do
-local username = database:get(bot_id.."Cybercode:User:Name" .. v)
-if username then
-t = t..""..k.."- ([@"..username.."])\n"
+elseif data and data.ID and data.ID == "UpdateMessageEdited" then
+    local msg = data
+    tdcli_function ({ID = "GetMessage", chat_id_ = msg.chat_id_, message_id_ = tonumber(msg.message_id_)}, function(extra, result, success)
+        if not result then
+            print("⚠️ خطأ: لم يتم العثور على الرسالة المعدلة!")
+            return
+        end
+
+        database:incr(bot_id..'Cybercode:message_edit'..result.chat_id_..result.sender_user_id_)
+        local Text = result.content_.text_
+        
+        if database:get(bot_id.."Cybercode:Lock:edit"..msg.chat_id_) and not Text and not BasicConstructor(result) then
+            local list = database:smembers(bot_id.."Cybercode:Basic:Constructor"..msg.chat_id_)
+            if list and #list > 0 then
+                local t = "⌔︙ المنشئين الاساسين تعالو  \n — — — — — — — — — \n"
+                for k,v in pairs(list) do
+                    local username = database:get(bot_id.."Cybercode:User:Name" .. v)
+                    if username then
+                        t = t..""..k.."- ([@"..username.."])\n"
+                    else
+                        t = t..""..k.."- [ID: "..v.."]\n"
+                    end
+                end
+                print(t)
+            else
+                print("⚠️ لا يوجد منشئين مسجلين في هذه المجموعة.")
+            end
+        end
+    end)
 else
 t = t..""..k.."- (`"..v.."`)\n"
 end
