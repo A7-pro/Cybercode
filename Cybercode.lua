@@ -10040,15 +10040,26 @@ elseif (data and data.ID and data.ID == "UpdateMessageSendSucceeded") then
     if msg and msg.content_ then
         local text = msg.content_.text_ or ""
         local Get_Msg_Pin = database:get(bot_id..'Cybercode:Msg:Pin:Chat'..msg.chat_id_)
-
-        -- التثبيت في حالة النص مطابق للمحفوظ
+        
+        -- في حالة النص مطابق للمحفوظ
         if Get_Msg_Pin and text == Get_Msg_Pin then
-            tdcli_function({ID = "PinChannelMessage", channel_id_ = msg.chat_id_:gsub('-100',''), message_id_ = msg.id_, disable_notification_ = 0}, function(arg, d) 
+            tdcli_function({ID = "PinChannelMessage", chat_id_ = msg.chat_id_, message_id_ = msg.id_}, function(arg, d)
                 if d.ID == 'Ok' then
                     database:del(bot_id..'Cybercode:Msg:Pin:Chat'..msg.chat_id_)
                 end
-            end, nil)   
+            end, nil)
         end
+
+        -- في حالة الملصق مطابق للمحفوظ
+        if msg.content_.sticker_ then
+            if Get_Msg_Pin == msg.content_.sticker_.sticker_.persistent_id_ then
+                tdcli_function({ID = "PinChannelMessage", chat_id_ = msg.chat_id_, message_id_ = msg.id_}, function(arg, d)
+                    database:del(bot_id..'Cybercode:Msg:Pin:Chat'..msg.chat_id_)
+                end, nil)
+            end
+        end
+    end
+end
         
         -- التثبيت في حالة الملصق مطابق للمحفوظ
         if msg.content_.sticker_ then 
