@@ -1,5 +1,5 @@
 services:
-  - type: worker  # تغيير نوع الخدمة إلى "worker" وليس "web"
+  - type: web  # نوع الخدمة "web" حتى تعمل على Render المجاني
     name: Cybercode
     env: ubuntu
     buildCommand: |
@@ -8,6 +8,9 @@ services:
       luarocks install luasec
       luarocks install redis-lua
       luarocks install dkjson
-    startCommand: lua /app/Cybercode.lua
+    startCommand: bash -c "redis-server --daemonize yes && lua /app/start.lua"
     plan: free
     autoDeploy: true
+    envVars:
+      - key: PORT
+        value: "8080"
