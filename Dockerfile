@@ -1,25 +1,24 @@
-# استخدام Ubuntu 22.04 كصورة أساسية
 FROM ubuntu:22.04
 
-# تحديث الحزم وتثبيت المتطلبات الأساسية
+# تحديث النظام وتثبيت المتطلبات الأساسية
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y --no-install-recommends \
-    lua5.3 \
-    luarocks \
-    redis-server \
-    curl \
-    python3 \
-    python3-pip \
-    git \
-    unzip \
-    wget \
-    libssl-dev \
-    liblua5.3-dev \
-    build-essential \
-    gcc \
-    make \
-    pkg-config \
-    libreadline-dev && \
+      lua5.3 \
+      luarocks \
+      redis-server \
+      curl \
+      python3 \
+      python3-pip \
+      git \
+      unzip \
+      wget \
+      libssl-dev \
+      liblua5.3-dev \
+      build-essential \
+      gcc \
+      make \
+      pkg-config \
+      libreadline-dev && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # ضبط متغيرات البيئة لمسارات المكتبات
@@ -28,11 +27,11 @@ ENV OPENSSL_INCDIR=/usr/include/openssl
 ENV OPENSSL_LIBDIR=/usr/lib/x86_64-linux-gnu
 ENV PATH="/usr/local/bin:$PATH"
 
-# تثبيت مكتبات Lua عبر luarocks
-RUN luarocks install luasocket && \
-    luarocks install luasec OPENSSL_LIBDIR=$OPENSSL_LIBDIR OPENSSL_INCDIR=$OPENSSL_INCDIR && \
-    luarocks install redis-lua && \
-    luarocks install dkjson
+# تثبيت مكتبات Lua عبر luarocks مع تحديد إصدار Lua
+RUN luarocks install luasocket --lua-version=5.3 && \
+    luarocks install luasec 0.8-1 OPENSSL_LIBDIR=$OPENSSL_LIBDIR OPENSSL_INCDIR=$OPENSSL_INCDIR --lua-version=5.3 && \
+    luarocks install redis-lua --lua-version=5.3 && \
+    luarocks install dkjson --lua-version=5.3
 
 # تثبيت مكتبات Python المطلوبة
 RUN pip3 install --no-cache-dir --upgrade pip setuptools wheel && \
