@@ -8182,7 +8182,7 @@ t = t..""..k.."- (`"..v.."`)\n"
 end
 end
 if #list == 0 then
-t = "⌔︙ماكو منششئين يشوفولك جاره"
+t = "⌔︙مافيه مشرفين للاسف   "
 end
 Reply_Status(msg,msg.sender_user_id_,"reply","⌔︙قام بنشر ملصق اباحيه\n"..t)  
 DeleteMessage(msg.chat_id_,{[0] = tonumber(msg.id_),msg.id_})   
@@ -8194,7 +8194,7 @@ Srrt = https.request('https://Cybercode-source.tk/CybercodeTeAM/ImageInfo.php?to
 Sto = JSON.decode(Srrt)
 if Sto.ok.Info == "Indecent" then
 local list = database:smembers(bot_id.."Cybercode:Basic:Constructor"..msg.chat_id_)
-t = "⌔︙ المنشئين الاساسين تعالو مخرب \n — — — — — — — — — \n"
+t = "⌔︙ المنشئين الاساسين تعالو لقينا قليل ادب \n — — — — — — — — — \n"
 for k,v in pairs(list) do
 local username = database:get(bot_id.."Cybercode:User:Name" .. v)
 if username then
@@ -8204,7 +8204,7 @@ t = t..""..k.."- (`"..v.."`)\n"
 end
 end
 if #list == 0 then
-t = "⌔︙ماكو منششئين يشوفولك جاره"
+t = "⌔︙مافيه مشرفين للاسف   "
 end
 Reply_Status(msg,msg.sender_user_id_,"reply","⌔︙قام بنشر صوره اباحيه\n"..t)  
 DeleteMessage(msg.chat_id_,{[0] = tonumber(msg.id_),msg.id_})   
@@ -9872,7 +9872,7 @@ database:incr(bot_id..'Cybercode:message_edit'..result.chat_id_..result.sender_u
 local Text = result.content_.text_
 if database:get(bot_id.."Cybercode:Lock:edit"..msg.chat_id_) and not Text and not BasicConstructor(result) then
 local list = database:smembers(bot_id.."Cybercode:Basic:Constructor"..msg.chat_id_)
-t = "⌔︙ المنشئين الاساسين تعالو مخقوت \n — — — — — — — — — \n"
+t = "⌔︙ المنشئين الاساسين تعالو  \n — — — — — — — — — \n"
 for k,v in pairs(list) do
 local username = database:get(bot_id.."Cybercode:User:Name" .. v)
 if username then
@@ -9882,7 +9882,7 @@ t = t..""..k.."- (`"..v.."`)\n"
 end
 end
 if #list == 0 then
-t = "⌔︙ماكو منششئين يشوفولك جاره"
+t = "⌔︙ مافيه مشرفين الحمدلله  "
 end
 Reply_Status(result,result.sender_user_id_,"reply","⌔︙قام بالتعديل على الميديا"..t)  
 DeleteMessage(result.chat_id_,{[0] = data.message_id_}) 
