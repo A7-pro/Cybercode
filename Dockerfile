@@ -15,6 +15,7 @@ RUN apt-get update && apt-get upgrade -y && \
       libssl-dev \
       liblua5.3-dev \
       libconfig-dev \
+      libjansson-dev \
       build-essential \
       gcc \
       make \
@@ -49,7 +50,7 @@ RUN pip3 install --no-cache-dir --upgrade pip setuptools wheel && \
 # تعيين مجلد العمل
 WORKDIR /app
 
-# نسخ الملفات من المستودع إلى الحاوية
+# نسخ جميع الملفات المطلوبة إلى الحاوية
 COPY . /app
 
 # إعطاء صلاحيات التنفيذ لملف البوت (Cybercode.lua)
