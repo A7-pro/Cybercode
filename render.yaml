@@ -1,9 +1,9 @@
 services:
-  - type: worker  # تغيير نوع الخدمة من "web" إلى "worker"
+  - type: worker  # تغيير نوع الخدمة إلى "worker" وليس "web"
     name: Cybercode
     env: ubuntu
     buildCommand: |
-      apt-get update && apt-get install -y lua5.3 luarocks redis-server
+      apt-get update && apt-get install -y lua5.3 luarocks redis-server curl
       luarocks install luasocket
       luarocks install luasec
       luarocks install redis-lua
