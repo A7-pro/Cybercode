@@ -1,7 +1,7 @@
-# استخدام Ubuntu كصورة أساسية (يفضل تحديد إصدار محدد للتكرار)
+# استخدام Ubuntu 22.04 كصورة أساسية
 FROM ubuntu:22.04
 
-# تحديث الحزم وتثبيت جميع المتطلبات الأساسية
+# تحديث الحزم وتثبيت المتطلبات الأساسية
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y --no-install-recommends \
     lua5.3 \
@@ -20,8 +20,7 @@ RUN apt-get update && apt-get upgrade -y && \
     make \
     pkg-config \
     libreadline-dev && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # ضبط متغيرات البيئة لمسارات المكتبات
 ENV LUA_INCDIR=/usr/include/lua5.3
@@ -31,7 +30,7 @@ ENV PATH="/usr/local/bin:$PATH"
 
 # تثبيت مكتبات Lua عبر Luarocks
 RUN luarocks install luasocket && \
-    luarocks install luasec OPENSSL_LIBDIR=$OPENSSL_LIBDIR OPENSSL_INCDIR=$OPENSSL_INCDIR && \
+    luarocks install luasec 0.8-1 OPENSSL_LIBDIR=$OPENSSL_LIBDIR OPENSSL_INCDIR=$OPENSSL_INCDIR && \
     luarocks install redis-lua && \
     luarocks install dkjson
 
@@ -45,5 +44,8 @@ WORKDIR /app
 # نسخ جميع الملفات المطلوبة إلى الحاوية
 COPY . /app
 
-# تشغيل Redis ثم تشغيل البوت مع ضبط مسارات Lua
-CMD ["bash", "-c", "eval \"$(luarocks path)\" && redis-server --daemonize yes && lua /app/start.lua"]
+# إعطاء الصلاحيات اللازمة لملف start.lua
+RUN chmod +x /app/start.lua
+
+# تشغيل Redis ثم تشغيل البوت
+CMD ["bash", "-c", "redis-server --daemonize yes && lua /app/start.lua"]
