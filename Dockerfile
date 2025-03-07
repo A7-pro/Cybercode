@@ -1,17 +1,21 @@
 # استخدام Ubuntu كصورة أساسية
 FROM ubuntu:latest
 
-# تحديث الحزم وتثبيت المتطلبات الأساسية
+# تحديث الحزم وتثبيت جميع المتطلبات الأساسية
 RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y lua5.3 luarocks redis-server curl python3 python3-pip git unzip wget libssl-dev liblua5.3-dev build-essential gcc make && \
+    apt-get install -y lua5.3 luarocks redis-server curl python3 python3-pip git unzip wget \
+    libssl-dev liblua5.3-dev build-essential gcc make pkg-config libreadline-dev && \
     luarocks path
 
-# ضبط مسار ملفات Lua بشكل يدوي
+# ضبط متغيرات البيئة لمسارات المكتبات
 ENV LUA_INCDIR=/usr/include/lua5.3
+ENV OPENSSL_INCDIR=/usr/include/openssl
+ENV OPENSSL_LIBDIR=/usr/lib/x86_64-linux-gnu
+ENV PATH="/usr/local/bin:$PATH"
 
-# تثبيت مكتبات Lua عبر Luarocks بعد تثبيت الحزم الضرورية
+# تثبيت مكتبات Lua عبر Luarocks بعد ضبط المسارات
 RUN luarocks install luasocket && \
-    luarocks install luasec OPENSSL_LIBDIR=/usr/lib OPENSSL_INCDIR=/usr/include/openssl && \
+    luarocks install luasec OPENSSL_LIBDIR=$OPENSSL_LIBDIR OPENSSL_INCDIR=$OPENSSL_INCDIR && \
     luarocks install redis-lua && \
     luarocks install dkjson
 
