@@ -14,9 +14,16 @@ os.execute("redis-server --daemonize yes")
 -- مهلة قصيرة للتأكد من أن Redis يعمل قبل تشغيل البوت
 os.execute("sleep 2")
 
--- فتح منفذ 8080 بشكل صحيح ليستمع له Render
+-- تشغيل سيرفر بسيط ليستمع على Render
 local server = socket.bind("0.0.0.0", 8080)
-server:settimeout(nil)
+print("Server running on port 8080...")
 
--- تشغيل البوت
-os.execute("lua /app/Cybercode.lua")
+-- تشغيل البوت في عملية منفصلة
+os.execute("lua /app/Cybercode.lua &")
+
+-- إبقاء السيرفر يعمل
+while true do
+    local client = server:accept()
+    client:send("HTTP/1.1 200 OK\r\nContent-Length: 2\r\n\r\nOK")
+    client:close()
+end
