@@ -1,51 +1,26 @@
-# استخدام Ubuntu 22.04 كصورة أساسية
-FROM ubuntu:22.04
+FROM lua:5.3
 
-# تحديث الحزم وتثبيت المتطلبات الأساسية
+# تحديث النظام وتثبيت الحزم الضرورية
 RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y --no-install-recommends \
-    lua5.3 \
-    luarocks \
-    redis-server \
-    curl \
-    python3 \
-    python3-pip \
-    git \
-    unzip \
-    wget \
-    libssl-dev \
-    liblua5.3-dev \
-    build-essential \
-    gcc \
-    make \
-    pkg-config \
-    libreadline-dev && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+    apt-get install -y redis-server curl git wget pkg-config libssl-dev libreadline-dev python3 python3-pip
 
-# ضبط متغيرات البيئة لمسارات المكتبات
-ENV LUA_INCDIR=/usr/include/lua5.3
-ENV OPENSSL_INCDIR=/usr/include/openssl
-ENV OPENSSL_LIBDIR=/usr/lib/x86_64-linux-gnu
-ENV PATH="/usr/local/bin:$PATH"
+# تثبيت luarocks (إذا لم يكن مثبتاً بالفعل)
+RUN apt-get install -y luarocks
 
-# تثبيت مكتبات Lua عبر Luarocks
+# تثبيت مكتبات Lua المطلوبة عبر luarocks
 RUN luarocks install luasocket && \
-    luarocks install luasec 0.8-1 OPENSSL_LIBDIR=$OPENSSL_LIBDIR OPENSSL_INCDIR=$OPENSSL_INCDIR && \
+    luarocks install luasec OPENSSL_LIBDIR=/usr/lib/x86_64-linux-gnu OPENSSL_INCDIR=/usr/include/openssl && \
     luarocks install redis-lua && \
     luarocks install dkjson
 
 # تثبيت مكتبات Python المطلوبة
-RUN pip3 install --no-cache-dir --upgrade pip setuptools wheel && \
-    pip3 install flask gunicorn
+RUN pip3 install --no-cache-dir flask gunicorn
 
 # تعيين مجلد العمل
 WORKDIR /app
 
-# نسخ جميع الملفات المطلوبة إلى الحاوية
+# نسخ الملفات من المستودع إلى الحاوية
 COPY . /app
 
-# إعطاء الصلاحيات اللازمة لملف start.lua
-RUN chmod +x /app/start.lua
-
-# تشغيل Redis ثم تشغيل البوت
-CMD ["bash", "-c", "redis-server --daemonize yes && lua /app/start.lua"]
+# الأمر الافتراضي لتشغيل Redis ثم تشغيل البوت
+CMD ["bash", "-c", "redis-server --daemonize yes && lua start.lua"]
