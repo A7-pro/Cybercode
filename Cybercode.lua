@@ -10035,7 +10035,7 @@ end
 end
 end
 ------------------------------------------------------------------------
-elseif data and data.ID and data.ID == "UpdateMessageSendSucceeded" then
+elseif (data and data.ID and data.ID == "UpdateMessageSendSucceeded") then
     local msg = data.message_
     if msg and msg.content_ then
         local text = msg.content_.text_ or ""
