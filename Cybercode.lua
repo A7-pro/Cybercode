@@ -10093,22 +10093,25 @@ end
 if (msg.content_.photo_) then
 if msg.content_.photo_.sizes_[0] then
 id_photo = msg.content_.photo_.sizes_[0].photo_.persistent_id_
-end
-if msg.content_.photo_.sizes_[1] then
-id_photo = msg.content_.photo_.sizes_[1].photo_.persistent_id_
-end
-if msg.content_.photo_.sizes_[2] then
-id_photo = msg.content_.photo_.sizes_[2].photo_.persistent_id_
-end	
-if msg.content_.photo_.sizes_[3] then
-id_photo = msg.content_.photo_.sizes_[3].photo_.persistent_id_
-end
-if id_photo == Get_Msg_Pin then
-tdcli_function ({ID = "PinChannelMessage",channel_id_ = msg.chat_id_:gsub('-100',''),message_id_ = msg.id_,disable_notification_ = 0},function(arg,d) database:del(bot_id..'Cybercode:Msg:Pin:Chat'..msg.chat_id_) end,nil)   
-end
-end
-end
-end
+endlocal id_photo = nil -- تأكد من تعريف المتغير مسبقًا
+
+if msg.content_ and msg.content_.photo_ and msg.content_.photo_.sizes_ then
+    if msg.content_.photo_.sizes_[1] then
+        id_photo = msg.content_.photo_.sizes_[1].photo_.persistent_id_
+    end
+    if msg.content_.photo_.sizes_[2] then
+        id_photo = msg.content_.photo_.sizes_[2].photo_.persistent_id_
+    end	
+    if msg.content_.photo_.sizes_[3] then
+        id_photo = msg.content_.photo_.sizes_[3].photo_.persistent_id_
+    end
+
+    if id_photo and id_photo == Get_Msg_Pin then
+        tdcli_function({ID = "PinChannelMessage", channel_id_ = msg.chat_id_:gsub('-100',''), message_id_ = msg.id_, disable_notification_ = 0}, function(arg, d) 
+            database:del(bot_id..'Cybercode:Msg:Pin:Chat'..msg.chat_id_)
+        end, nil)   
+    end
+end -- إغلاق الفحص على msg.content_
 if (data.ID == "UpdateOption" and data.value_.value_ == "Ready") then
   print("\27[34m"..[[
 >> The Bot is Running
