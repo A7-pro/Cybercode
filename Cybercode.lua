@@ -36,14 +36,6 @@ port :: ]]..port..[[
 
 time ::]]..Rtime.."\27[m")
 
-io.popen("mkdir Cybercode_Files")
-t = "\27[35m".."\nAll Files Started : \n____________________\n"..'\27[m'
-i = 0
-for v in io.popen('ls Cybercode_Files'):lines() do
-if v:match(".lua$") then
-i = i + 1
-t = t.."\27[39m"..i.."\27[36m".." - \27[10;32m"..v..",\27[m \n"
-end
 end
 print(t)
 function vardump(value)  
@@ -3767,12 +3759,12 @@ send(msg.chat_id_, msg.id_,' البوت ليس مشرف يرجى ترقيتي !'
 return false  
 end
 heen = {
-"-  علاج الجاهل التجاهل ."
+"- حبيبي علاج الجاهل التجاهل ."
 ,"- مالي خلك زبايل التلي . "
 ,"- كرامتك صارت بزبل פَــبي ."
 ,"- مو صوجك صوج الكواد الزمك جهاز ."
 ,"- لفارغ استجن . "
-,"ڪِݪك واحد لوكي  ."
+,"- ڪِݪك واحد لوكي كس ."
 ,"- ملطلط دي ."
 };
 sendheen = heen[math.random(#heen)]
