@@ -10034,7 +10034,7 @@ return false
 end
 end
 end
-end,nil)
+end)
 ------------------------------------------------------------------------
 elseif (data.ID == "UpdateMessageSendSucceeded") then
 local msg = data.message_
