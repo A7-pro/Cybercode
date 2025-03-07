@@ -3,10 +3,10 @@ FROM ubuntu:latest
 
 # تحديث الحزم وتثبيت المتطلبات الأساسية
 RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y lua5.3 luarocks redis-server curl python3 python3-pip git unzip wget libssl-dev && \
+    apt-get install -y lua5.3 luarocks redis-server curl python3 python3-pip git unzip wget libssl-dev liblua5.3-dev && \
     luarocks path
 
-# التأكد من إعداد `luarocks` بشكل صحيح قبل التثبيت
+# تثبيت مكتبات Lua عبر Luarocks بعد تثبيت الحزم الضرورية
 RUN luarocks install luasocket && \
     luarocks install luasec OPENSSL_LIBDIR=/usr/lib OPENSSL_INCDIR=/usr/include/openssl && \
     luarocks install redis-lua && \
