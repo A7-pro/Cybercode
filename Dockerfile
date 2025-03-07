@@ -1,6 +1,6 @@
 FROM ubuntu:22.04
 
-# تثبيت المتطلبات الأساسية مع ca-certificates
+# تثبيت المتطلبات الأساسية
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y --no-install-recommends \
       lua5.3 \
@@ -17,15 +17,14 @@ RUN apt-get update && apt-get upgrade -y && \
       ca-certificates && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# تثبيت Telegram CLI
-RUN git clone --recursive https://github.com/vysheng/tg.git /tmp/tg && \
+# تثبيت Telegram CLI من مستودع محدث
+RUN git clone --recursive https://github.com/kenorb-contrib/tg.git /tmp/tg && \
     cd /tmp/tg && \
-    sed -i 's/-Werror//g' Makefile && \
     ./configure && make && \
-    mv /tmp/tg/bin/telegram-cli /usr/local/bin/ && \
+    mv bin/telegram-cli /usr/local/bin/ && \
     rm -rf /tmp/tg
 
-# متغيرات البيئة
+# ضبط متغيرات البيئة
 ENV LUA_INCDIR=/usr/include/lua5.3
 ENV PATH="/usr/local/bin:$PATH"
 
@@ -35,7 +34,7 @@ RUN luarocks install luasocket --lua-version=5.3 && \
     luarocks install redis-lua --lua-version=5.3 && \
     luarocks install dkjson --lua-version=5.3
 
-# مجلد العمل ونسخ الملفات
+# إعداد مجلد العمل ونسخ الملفات (بما في ذلك File_Libs)
 WORKDIR /app
 COPY . /app
 
