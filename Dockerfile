@@ -7,15 +7,24 @@ RUN apt-get update && apt-get upgrade -y && \
       luarocks \
       redis-server \
       curl \
+      python3 \
+      python3-pip \
       git \
+      unzip \
       wget \
       libssl-dev \
       liblua5.3-dev \
       libconfig-dev \
       libjansson-dev \
       build-essential \
+      gcc \
+      make \
+      pkg-config \
+      libreadline-dev \
+      dnsutils \
       libevent-dev \
-      zlib1g-dev && \
+      zlib1g-dev \
+      ca-certificates && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # تثبيت Telegram CLI
@@ -26,21 +35,4 @@ RUN git clone --recursive https://github.com/vysheng/tg.git /tmp/tg && \
     mv /tmp/tg/bin/telegram-cli /usr/local/bin/ && \
     rm -rf /tmp/tg
 
-# ضبط متغيرات البيئة
-ENV LUA_INCDIR=/usr/include/lua5.3
-ENV PATH="/usr/local/bin:$PATH"
-
-# تثبيت مكتبات Lua
-RUN luarocks install luasocket --lua-version=5.3 && \
-    luarocks install luasec --lua-version=5.3 OPENSSL_DIR=/usr && \
-    luarocks install redis-lua --lua-version=5.3 && \
-    luarocks install dkjson --lua-version=5.3
-
-# تعيين مجلد العمل
-WORKDIR /app
-
-# نسخ الملفات
-COPY . /app
-
-# تشغيل Redis والبوت
-CMD ["bash", "-c", "redis-server --daemonize yes && lua /app/start.lua"]
+# باقي الـ Dockerfile...
