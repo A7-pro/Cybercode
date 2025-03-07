@@ -28,5 +28,5 @@ WORKDIR /app
 # نسخ جميع الملفات المطلوبة إلى الحاوية
 COPY . /app
 
-# تشغيل Redis ثم تشغيل البوت
-CMD ["bash", "-c", "redis-server --daemonize yes && lua /app/start.lua"]
+# تشغيل Redis ثم تشغيل البوت مع انتظار بسيط لضمان عدم حدوث Timeout
+CMD exec bash -c "redis-server --daemonize yes && sleep 3 && lua /app/Cybercode.lua"
