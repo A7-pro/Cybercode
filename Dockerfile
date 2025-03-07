@@ -1,8 +1,10 @@
-FROM lua:5.3-slim
+# استخدام Ubuntu 22.04 كصورة أساسية
+FROM ubuntu:22.04
 
 # تحديث الحزم وتثبيت المتطلبات الأساسية
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y --no-install-recommends \
+    lua5.3 \
     luarocks \
     redis-server \
     curl \
@@ -26,7 +28,7 @@ ENV OPENSSL_INCDIR=/usr/include/openssl
 ENV OPENSSL_LIBDIR=/usr/lib/x86_64-linux-gnu
 ENV PATH="/usr/local/bin:$PATH"
 
-# تثبيت مكتبات Lua عبر Luarocks
+# تثبيت مكتبات Lua عبر luarocks
 RUN luarocks install luasocket && \
     luarocks install luasec OPENSSL_LIBDIR=$OPENSSL_LIBDIR OPENSSL_INCDIR=$OPENSSL_INCDIR && \
     luarocks install redis-lua && \
