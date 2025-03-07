@@ -1,14 +1,14 @@
 services:
-  - type: web  # نوع الخدمة "web" حتى تعمل على Render المجاني
+  - type: web
     name: Cybercode
     env: ubuntu
     buildCommand: |
-      apt-get update && apt-get install -y lua5.3 luarocks redis-server curl
+      apt-get update && apt-get install -y lua5.3 luarocks redis-server curl python3
       luarocks install luasocket
       luarocks install luasec
       luarocks install redis-lua
       luarocks install dkjson
-    startCommand: bash -c "redis-server --daemonize yes && lua /app/start.lua"
+    startCommand: bash -c "redis-server --daemonize yes && python3 -m http.server 8080 & lua /app/start.lua"
     plan: free
     autoDeploy: true
     envVars:
