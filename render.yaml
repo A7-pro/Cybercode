@@ -9,7 +9,7 @@ services:
       luarocks install redis-lua
       luarocks install dkjson
       pip3 install flask
-    startCommand: bash -c "redis-server --daemonize yes && python3 /app/server.py & lua /app/start.lua"
+    startCommand: python3 /app/server.py
     plan: free
     autoDeploy: true
     envVars:
