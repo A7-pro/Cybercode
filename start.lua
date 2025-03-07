@@ -6,7 +6,6 @@ local json = dofile("/app/File_Libs/JSON.lua")
 local URL = dofile("/app/File_Libs/url.lua")
 local https = require("ssl.https")
 local http = require("socket.http")
-local socket = require("socket")
 
 -- تشغيل Redis
 os.execute("redis-server --daemonize yes")
@@ -17,12 +16,5 @@ os.execute("sleep 2")
 -- تشغيل البوت في الخلفية
 os.execute("lua /app/Cybercode.lua &")
 
--- إنشاء سيرفر ويب وهمي ليستمع لـ Render
-local server = socket.bind("0.0.0.0", 8080)
-print("🚀 Server is running on port 8080...")
-
-while true do
-    local client = server:accept()
-    client:send("HTTP/1.1 200 OK\r\nContent-Length: 2\r\n\r\nOK")
-    client:close()
-end
+-- تشغيل سيرفر Python حتى يعمل المنفذ 8080
+os.execute("nohup python3 -m http.server 8080 --bind 0.0.0.0 > /dev/null 2>&1 &")
