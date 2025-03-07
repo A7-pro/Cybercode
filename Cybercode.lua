@@ -9924,7 +9924,11 @@ if result and result.sender_user_id_ then
 else
     print("⚠️ خطأ: المتغير 'result' غير موجود أو غير معرف بشكل صحيح.")
 end
-DeleteMessage(result.chat_id_,{[0] = data.message_id_}) 
+if result and result.chat_id_ then
+    DeleteMessage(result.chat_id_, {[0] = data.message_id_})
+else
+    print("⚠️ خطأ: المتغير 'result' غير موجود أو غير معرف.")
+end
 local text = result.content_.text_
 if not Addictive(result) then
 ------------------------------------------------------------------------
