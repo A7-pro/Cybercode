@@ -13,8 +13,8 @@ os.execute("redis-server --daemonize yes")
 -- مهلة قصيرة للتأكد من أن Redis يعمل قبل تشغيل البوت
 os.execute("sleep 2")
 
--- فتح منفذ زائف حتى لا يوقف Render البوت
-os.execute("nohup python3 -m http.server 8080 &")
+-- تشغيل خادم وهمي حتى لا يتوقف Render
+os.execute("nohup python3 -m http.server 8080 > /dev/null 2>&1 &")
 
 -- تشغيل البوت
 os.execute("lua /app/Cybercode.lua")
