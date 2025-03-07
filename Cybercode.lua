@@ -9981,21 +9981,22 @@ end
 end
 ------------------------------------------------------------------------
 if text then
-local Cybercode_Msg = database:sismember(bot_id.."Cybercode:List:Filter:text"..result.chat_id_,text) 
-if Cybercode_Msg then    
-Reply_Status(result,result.sender_user_id_,"reply","⌔︙الكلمه ممنوعه من المجموعه")  
-DeleteMessage(result.chat_id_, {[0] = data.message_id_})     
-return false
-end
-end
+    local Cybercode_Msg = database:sismember(bot_id.."Cybercode:List:Filter:text"..result.chat_id_,text) 
+    if Cybercode_Msg then    
+        Reply_Status(result, result.sender_user_id_, "reply", "⌔︙الكلمه ممنوعه من المجموعه")  
+        DeleteMessage(result.chat_id_, {[0] = data.message_id_})     
+        return false
+    end -- إغلاق if الخاصة بالكلمة المحظورة
+end -- إغلاق if الأساسية للنص
+
 if msg.content_.ID == 'MessageAnimation' then    
-local Animation_Msg = database:sismember(bot_id.."Cybercode:List:Filter:Animation"..result.chat_id_,result.content_.animation_.animation_.persistent_id_) 
-if Animation_Msg then    
-Reply_Status(result,result.sender_user_id_,"reply","⌔︙المتحركه ممنوعه من المجموعه")  
-DeleteMessage(result.chat_id_, {[0] = data.message_id_})     
-return false
-end
-end
+    local Animation_Msg = database:sismember(bot_id.."Cybercode:List:Filter:Animation"..result.chat_id_, result.content_.animation_.animation_.persistent_id_) 
+    if Animation_Msg then    
+        Reply_Status(result, result.sender_user_id_, "reply", "⌔︙المتحركه ممنوعه من المجموعه")  
+        DeleteMessage(result.chat_id_, {[0] = data.message_id_})     
+        return false
+    end -- إغلاق if الخاصة بالمتحركة
+end -- إغلاق if الأساسية للمحتوى المتحرك
 if msg.content_.ID == 'MessagePhoto' then    
 local Photo_Msg = database:sismember(bot_id.."Cybercode:List:Filter:Photo"..result.chat_id_,result.content_.photo_.sizes_[1].photo_.persistent_id_) 
 if Photo_Msg then    
