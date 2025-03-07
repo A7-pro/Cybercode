@@ -2,25 +2,13 @@
 FROM ubuntu:latest
 
 # تحديث الحزم وتثبيت المتطلبات الأساسية
-RUN apt-get update && apt-get install -y \
-    lua5.3 \
-    luarocks \
-    redis-server \
-    git \
-    curl \
-    build-essential \
-    liblua5.3-dev \
-    libssl-dev \
-    openssl \
-    libcurl4-openssl-dev \
-    unzip \
-    wget
-
-# تثبيت مكتبات Lua المطلوبة عبر Luarocks مع دعم OpenSSL
-RUN luarocks install luasocket && \
-    luarocks install luasec OPENSSL_DIR=/usr && \
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y lua5.3 luarocks redis-server curl python3 python3-pip git && \
+    luarocks install luasocket && \
+    luarocks install luasec && \
     luarocks install redis-lua && \
-    luarocks install dkjson
+    luarocks install dkjson && \
+    pip3 install --upgrade pip setuptools wheel && pip3 install flask gunicorn
 
 # تعيين مجلد العمل
 WORKDIR /app
@@ -28,5 +16,8 @@ WORKDIR /app
 # نسخ جميع الملفات المطلوبة إلى الحاوية
 COPY . /app
 
-# تشغيل Redis ثم تشغيل البوت مع انتظار بسيط لضمان عدم حدوث Timeout
-CMD exec bash -c "redis-server --daemonize yes && sleep 3 && lua /app/Cybercode.lua"
+# إعطاء الصلاحيات اللازمة
+RUN chmod +x /app/start.lua
+
+# تشغيل Redis ثم تشغيل البوت
+CMD ["bash", "-c", "redis-server --daemonize yes && lua /app/start.lua"]
