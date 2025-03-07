@@ -13,8 +13,5 @@ os.execute("redis-server --daemonize yes")
 -- مهلة قصيرة للتأكد من أن Redis يعمل قبل تشغيل البوت
 os.execute("sleep 2")
 
--- تشغيل البوت في الخلفية
-os.execute("lua /app/Cybercode.lua &")
-
--- تشغيل سيرفر Python حتى يعمل المنفذ 8080
-os.execute("nohup python3 -m http.server 8080 --bind 0.0.0.0 > /dev/null 2>&1 &")
+-- تشغيل البوت
+os.execute("lua /app/Cybercode.lua")
