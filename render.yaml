@@ -1,6 +1,13 @@
 services:
-  - type: web
+  - type: worker  # تغيير نوع الخدمة من "web" إلى "worker"
     name: Cybercode
-    env: docker
+    env: ubuntu
+    buildCommand: |
+      apt-get update && apt-get install -y lua5.3 luarocks redis-server
+      luarocks install luasocket
+      luarocks install luasec
+      luarocks install redis-lua
+      luarocks install dkjson
+    startCommand: lua /app/Cybercode.lua
     plan: free
     autoDeploy: true
